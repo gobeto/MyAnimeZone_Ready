@@ -19,9 +19,14 @@ model User{
   hashedPassword String?
   createdAt DateTime @default(now())
   updated DateTime @updatedAt
+
+  isAdmin Boolean @default(false)
+
   favoriteIds String[] @db.ObjectId
   sessions Session[]
   accounts Account[]
+
+ 
 }
 
 model Account{
@@ -37,6 +42,7 @@ model Account{
   scope String?
   id_token String? @db.String
   session_state String?
+
 
   user User @relation(fields: [userId],references: [id], onDelete: Cascade)
 

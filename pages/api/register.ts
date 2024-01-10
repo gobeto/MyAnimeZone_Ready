@@ -20,19 +20,20 @@ export default async function handler(
     });
 
     if (existingUser) {
-        return res.status(422).json({error: 'Email taken'});
+      return res.status(422).json({ error: "Email taken" });
     }
 
-    const hashedPassword = await bcrypt.hash(password,12);
+    const hashedPassword = await bcrypt.hash(password, 12);
 
     const user = await prismadb.user.create({
-        data:{
-            email,
-            name,
-            hashedPassword,
-            image: '',
-            emailVerified: new Date(),
-        }
+      data: {
+        email,
+        name,
+        hashedPassword,
+        image: "",
+        emailVerified: new Date(),
+        isAdmin: false,
+      },
     });
     return res.status(200).json(user);
   } catch (error) {

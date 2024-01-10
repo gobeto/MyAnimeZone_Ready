@@ -1,5 +1,7 @@
 import React from "react";
 
+
+//different menus in navbar
 interface NavbarItemProps{
     label:string;
 }

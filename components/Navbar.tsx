@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
+import axios from "axios";
+//>
+//<
 
 import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
@@ -11,20 +14,35 @@ const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
+  //>//<
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  useEffect(()=>{
-    const handleScroll = ()=>{
-      if(window.scrollY >= TOP_OFFSET){
-        setShowBackground(true)
-      }else{
+
+  // function to check isAdmin
+  useEffect(() => {
+    axios
+      .get("/api/current")
+      .then((response) => {
+        setIsAdmin(response.data.isAdmin); 
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= TOP_OFFSET) {
+        setShowBackground(true);
+      } else {
         setShowBackground(false);
       }
-    }
-    window.addEventListener('scroll',handleScroll);
+    };
+    window.addEventListener("scroll", handleScroll);
 
-    return ()=>{
-      window.removeEventListener('scroll',handleScroll);
-    }
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const toggleMobileMenu = useCallback(() => {
@@ -34,6 +52,9 @@ const Navbar = () => {
   const toggleAccountMenu = useCallback(() => {
     setShowAccountMenu((current) => !current);
   }, []);
+
+  //>
+  //<
 
   return (
     <nav className="w-full fixed z-40">
@@ -47,9 +68,10 @@ const Navbar = () => {
             items-center
             transition
             duration-500
-            ${showBackground ? 'bg-zinc-900 bg-opacity-90' : ''}
+            ${showBackground ? "bg-zinc-900 bg-opacity-90" : ""}
 
-            `}>
+            `}
+      >
         <img className="h-10 lg:h-20 " src="/images/logoOni.png" alt="Logo" />
         <p className="text-white p-4 font-bold lg:text-xl ">MyAnimeZone</p>
         <div
@@ -66,13 +88,19 @@ const Navbar = () => {
           <NavbarItem label="Films" />
           <NavbarItem label="New & Popular" />
           <NavbarItem label="My List" />
+          {/* check if the isAdmin is true and if it is visualise button */}
+          {isAdmin && <NavbarItem label="Admin" />}
         </div>
         <div
           onClick={toggleMobileMenu}
           className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
         >
           <p className="text-white text-sm">Browse</p>
-          <BsChevronDown className={`text-white transition ${showMobileMenu? 'rotate-180' :'rotate-0'  }`} />
+          <BsChevronDown
+            className={`text-white transition ${
+              showMobileMenu ? "rotate-180" : "rotate-0"
+            }`}
+          />
           <MobileMenu visible={showMobileMenu} />
         </div>
         <div className="flex flex-row ml-auto gap-7 items-center">
@@ -83,14 +111,22 @@ const Navbar = () => {
             <BsBell />
           </div>
 
-          <div onClick={toggleAccountMenu} className="flex flex-row items-center gap-2 cursor-pointer relative">
+          <div
+            onClick={toggleAccountMenu}
+            className="flex flex-row items-center gap-2 cursor-pointer relative"
+          >
             <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden relative">
               <img src="/images/default-blue.png" alt="" />
             </div>
-            <BsChevronDown className={`text-white transition ${showAccountMenu? 'rotate-180' :'rotate-0'  }`} />
+            <BsChevronDown
+              className={`text-white transition ${
+                showAccountMenu ? "rotate-180" : "rotate-0"
+              }`}
+            />
             <AccountMenu visible={showAccountMenu} />
           </div>
 
+          {/* > */}
         </div>
       </div>
     </nav>

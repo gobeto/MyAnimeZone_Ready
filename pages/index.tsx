@@ -9,6 +9,7 @@ import useFavorites from "@/hooks/useFavorites";
 import InfoModal from "@/components/infoModal";
 import useInfoModal from "@/hooks/useInfoModal";
 
+
 //check if available session exist and if it doesnt it redirect to /auth
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
