@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
 import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
 import axios from "axios";
+import Link from 'next/link'; 
 //>
 //<
 
 import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
 import AccountMenu from "./AccountMenu";
+import AnimeAddForm from "./AnimeAddForm";
 
 const TOP_OFFSET = 66;
 
@@ -14,6 +16,7 @@ const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
+  const [showAddMovieForm, setShowAddMovieForm] = useState(false);
   //>//<
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -83,13 +86,17 @@ const Navbar = () => {
                 lg:flex
                 "
         >
-          <NavbarItem label="Home" />
+          <Link href="/">
+            <NavbarItem label="Home" />
+          </Link>
           <NavbarItem label="Series" />
           <NavbarItem label="Films" />
-          <NavbarItem label="New & Popular" />
-          <NavbarItem label="My List" />
           {/* check if the isAdmin is true and if it is visualise button */}
-          {isAdmin && <NavbarItem label="Admin" />}
+          {isAdmin && <NavbarItem label="Add Anime" onClick={() => setShowAddMovieForm(!showAddMovieForm)} />}
+          {showAddMovieForm && <AnimeAddForm onClose={() => setShowAddMovieForm(false)} />}
+          <Link href="/library">
+            <NavbarItem label="My Library" />
+          </Link>
         </div>
         <div
           onClick={toggleMobileMenu}
@@ -125,8 +132,6 @@ const Navbar = () => {
             />
             <AccountMenu visible={showAccountMenu} />
           </div>
-
-          {/* > */}
         </div>
       </div>
     </nav>
