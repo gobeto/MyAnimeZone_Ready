@@ -12,7 +12,7 @@ interface NavbarItemProps{
 
 const NavbarItem: React.FC<NavbarItemProps> = ({ label, onClick }) => {
     return (
-      <div className="text-white cursor-pointer hover:text-gray transition font-black" onClick={onClick}>
+      <div className="text-black cursor-pointer hover:text-gray transition font-black" onClick={onClick}>
         {label}
       </div>
     );
