@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-interface movie {
-  id: number;
+interface Movie {
+  id: any;
   title: string;
   description: string;
   videoUrl: string;
@@ -14,18 +14,20 @@ interface movie {
 interface Options {
   sort?: string;
   filter?: string;
+  searchTerm?: string;
 }
 
-const usemovie = (options: Options = {}): [movie[], boolean, any] => {
-  const [movie, setmovie] = useState<movie[]>([]);
+const useMovie = (options: Options = {}): [Movie[], boolean, any, (searchTerm: string) => void] => {
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(null);
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
-    const fetchmovie = async () => {
+    const fetchMovies = async () => {
       try {
         const response = await axios.get('/api/movies', { params: options });
-        setmovie(response.data);
+        setMovies(response.data);
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -33,10 +35,19 @@ const usemovie = (options: Options = {}): [movie[], boolean, any] => {
       }
     };
 
-    fetchmovie();
+    fetchMovies();
   }, [options]);
 
-  return [movie, loading, error];
+  useEffect(() => {
+    if (searchTerm === "") {
+      setMovies(movies);
+    } else {
+      const filteredMovies = movies.filter((movie) => movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
+      setMovies(filteredMovies);
+    }
+  }, [searchTerm]);
+
+  return [movies, loading, error, setSearchTerm];
 };
 
-export default usemovie;
+export default useMovie;

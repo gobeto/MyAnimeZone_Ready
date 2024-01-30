@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import useAnime from "@/hooks/useAnimeVisualize";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Router from "@/components/Router";
+
 
 function Library() {
-  const [anime, loading, error] = useAnime({ sort: "title", filter: "action" });
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-  const [searchTerm, setSearchTerm] = useState("");
+  const [anime, loading, error] = useAnime({ sort: "title", filter: "action", searchTerm });
+  const router = useRouter();
 
+  //router.push(`/anime/${anime[0].id}`);
 
   const handleClick = (event: React.MouseEvent) => {
     setCurrentPage(Number((event.target as HTMLLIElement).id));
@@ -22,7 +28,8 @@ function Library() {
   for (let i = 1; i <= Math.ceil(filteredAnime.length / itemsPerPage); i++) {
       pageNumbers.push(i);
   }
-
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
   
   return (
     <>
@@ -53,20 +60,19 @@ function Library() {
       <div className="flex justify-center items-center h-auto transition-all duration-500 ease-in-out">
         <div className="flex flex-wrap justify-center">
           {currentItems.map((anime) => (
-            <div
-              key={anime.id}
-              className="m-4 p-4 border-2 border-gray-300 text-white"
-            >
-              <img
-                className="w-60 h-72 object-cover"
-                src={anime.thumbnaiUrl}
-                alt={anime.title}
-              />
-              <h2 className="mt-2 text-center text-black font-black">
-                {anime.title}
-              </h2>
-            </div>
-          ))}
+                <div className="m-4 p-4 border-2 border-gray-300 text-white" key={anime.id}>                
+                <Link href={`/anime/${anime.id}`} key={anime.id}>
+                  <img
+                    className="w-60 h-72 object-cover"
+                    src={anime.thumbnaiUrl}
+                    alt={anime.title}
+                  />
+                </Link>
+                  <h2 className="mt-2 text-center text-black font-black">
+                    {anime.title}
+                  </h2>
+                </div>
+            ))}
         </div>
       </div>
       <ul className="flex justify-center">

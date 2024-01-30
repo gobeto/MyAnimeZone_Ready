@@ -193,3 +193,22 @@ export default Navbar;
             className="focus:outline-none cursor-pointer w-96 h-10 pl-2 pr-2 rounded-lg bg-transparent"
           />{" "}
         </div>
+
+
+//
+{currentItems.map((anime) => (
+                <Link href={`/anime/${anime.id}`} key={anime.id}>
+                <div className="m-4 p-4 border-2 border-gray-300 text-white">
+                  <img
+                    className="w-60 h-72 object-cover"
+                    src={anime.thumbnaiUrl}
+                    alt={anime.title}
+                  />
+                  <h2 className="mt-2 text-center text-black font-black">
+                    {anime.title}
+                  </h2>
+                </div>
+              </Link>
+            ))}
+
+            656e198482842d42c948686a

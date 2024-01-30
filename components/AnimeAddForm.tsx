@@ -47,8 +47,8 @@ function AddMovie({ onClose }: AddMovieProps) {
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" className="p-2 border rounded w-full" required pattern=".{3,}" title="3 characters minimum" />
           </div>
           <div>
-            <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" className="p-2 border rounded w-full" required maxLength={500} rows={2}/>
-            <p className="text-right">{description.length}/500</p>
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" className="p-2 border rounded w-full" required maxLength={1000} rows={2}/>
+            <p className="text-right">{description.length}/1000</p>
           </div>
           <div>
             <input type="text" value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} placeholder="Video URL" className="p-2 border rounded w-full" required pattern="https?://.+" title="Must be a valid URL" />
