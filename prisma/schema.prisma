@@ -23,11 +23,16 @@ model User{
   isAdmin Boolean @default(false)
 
   favoriteIds String[] @db.ObjectId
+  libraryAnimeIds String[] @db.ObjectId
+  watchingIds String[] @db.ObjectId
+  wantToWatchIds String[] @db.ObjectId
+  completedIds String[] @db.ObjectId
+
   sessions Session[]
   accounts Account[]
 
  
-}
+} 
 
 model Account{
   id String @id @default(auto()) @map("_id")@db.ObjectId
