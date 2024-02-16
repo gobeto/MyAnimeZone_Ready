@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 interface Movie {
+  status: string;
   id: any;
   title: string;
   description: string;

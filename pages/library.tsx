@@ -4,14 +4,14 @@ import Navbar from "@/components/Navbar";
 import MovieList from "@/components/MovieList";
 import useFavorites from "@/hooks/useFavorites";
 import AnimesLibrary from "@/components/animesLibrary";
+import ScrollButton from "@/components/ScrollButton";
+//import AnimeFilterButtons from "@/components/AnimeFilterButtons";
+
 
 function AnimeVisualize() {
   const [anime, loading, error] = useAnime({ sort: "title", filter: "action" });
+  const{ data: favorites = [] } = useFavorites();
 
-  const handleClick = () => {
-    console.log("SVG clicked");
-    // Add your logic here
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -22,11 +22,14 @@ function AnimeVisualize() {
   }
 
   return (
-    <>
+    <> 
       <Navbar />
-      <div className="flex flex-col justify-center items-center min-h-screen">
-        <AnimesLibrary />
+      {/* <AnimeFilterButtons animes={[]} setFilteredAnimes={() => {}}/> */}
+      <div className="flex flex-col justify-center items-center pt-14">
+        <AnimesLibrary />   
       </div>
+      {/* <MovieList title="Favorites" data={favorites} /> */}
+      <ScrollButton />
     </>
   );
 }
