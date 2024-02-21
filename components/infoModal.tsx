@@ -6,6 +6,9 @@ import FavoriteButton from "./FavoriteButton";
 import useInfoModal from "@/hooks/useInfoModal";
 import useMovie from "@/hooks/useMovie";
 
+
+//delete
+
 interface InfoModalProps {
   visible?: boolean;
   onClose: any;
@@ -114,25 +117,17 @@ const InfoModal: React.FC<InfoModalProps> = ({ visible, onClose }) => {
                 {data?.title}
               </p>
               <div className="flex - flex-row gap-4 items-center">
-                <PlayButton movieId={data?.id}/>
+                <PlayButton movieId={data?.id} />
                 <FavoriteButton movieId={data?.id} />
               </div>
             </div>
           </div>
-            <div className="px-12 py-8">
-                <p className="text-green-400 font-semibold text-lg">
-                    New
-                </p>
-                <p className="text-white text-lg">
-                    {data?.duration}
-                </p>
-                <p className="text-white text-lg">
-                    {data?.genre}
-                </p>
-                <p className="text-white text-lg">
-                    {data?.description}
-                </p>
-            </div>
+          <div className="px-12 py-8">
+            <p className="text-green-400 font-semibold text-lg">New</p>
+            <p className="text-white text-lg">{data?.duration}</p>
+            <p className="text-white text-lg">{data?.genre}</p>
+            <p className="text-white text-lg">{data?.description}</p>
+          </div>
 
         </div>
       </div>

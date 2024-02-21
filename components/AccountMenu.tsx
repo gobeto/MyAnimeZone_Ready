@@ -14,7 +14,7 @@ const {data} = useCurrentUser();
   }
 
   return (
-    <div className=" bg-black w-56 absolute top-14 right-0 py-5 flex-col border-2 border-gray-800 flex">
+    <div className=" bg-black w-56 absolute top-14 right-0 py-5 flex-col border-2 border-gray-800 flex z-50 ">
       <div className="flex flex-col gap-3">
         <div className="px-3 group/item flex flex-row gap-3 item center w-full">
           <img

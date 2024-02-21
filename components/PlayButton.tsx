@@ -1,6 +1,8 @@
 import React from "react";
-import { BsFillPlayFill } from "react-icons/bs";
 import { useRouter } from "next/router";
+import{AiOutlineInfoCircle} from 'react-icons/ai';
+
+//info button which redirect to individual anime page - Billboard
 
 interface PlayButtonProps{
     movieId:string;
@@ -27,8 +29,8 @@ const PlayButton: React.FC<PlayButtonProps> = ({movieId})=>{
         transition
         "
         >
-            <BsFillPlayFill size ={25} className = "mr-1"/>
-            Play
+            <AiOutlineInfoCircle className=" mr-1" />
+            Info
         </button>
     )
 };

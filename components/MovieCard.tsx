@@ -1,18 +1,25 @@
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import FavoriteButton from "./FavoriteButton";
 import { useRouter } from "next/router";
 import useInfoModal from "@/hooks/useInfoModal";
-import {BiChevronDown} from 'react-icons/bi'
+import { BiChevronDown } from "react-icons/bi";
+import TrailerButton from "./trailerButton";
+
+//hover effect on the movie card
+
 interface MovieCardProps {
   data: Record<string, any>;
+  trailer: string;
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
   const router = useRouter();
   const { openModal } = useInfoModal();
   return (
-    <div className="group bg-zinc-900 col-span relative h-[12vw]">
+    //ot tuk se promenq razmera na img za animeta v main page
+    <div className="group bg-slate-500 col-span relative  w-[18vw] h-[22vw]">
       <img
         className="cursor-pointer 
             object-cover
@@ -23,8 +30,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             group-hover:opacity-90
             sm:group-hover:opacity-0
             delay-300
-            w-full
-            h-[12vw]"
+            w-[18vw]
+            h-[22vw]"
         src={data.thumbnaiUrl}
         alt="Thumbnail"
       />
@@ -39,11 +46,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             invisible
             sm:visible
             delay-300
-            w-full
+            w-[16vw]
             scale-0
             group-hover:scale-110
-            gropu-hover: -translate-y-[6vw]
-            group-hover:translate-x-[6vw]
+            gropu-hover: -translate-y-[3vw]
             group-hover:opacity-100
             "
       >
@@ -56,7 +62,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
                 shadow-xl
                 rounded-t-md
                 w-full
-                h-[12vw]
+                h-[15vw]
                 "
           src={data.thumbnaiUrl}
           alt="Thumbnail"
@@ -92,10 +98,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
             "
               onClick={() => router.push(`/watch/${data?.id}`)}
             >
-              <BsFillPlayFill size={25} />
+              <AiOutlineInfoCircle size={25} />
             </div>
             <FavoriteButton movieId={data?.id} />
-            <div 
+            {/* <div 
             onClick={()=>openModal(data?.id)}
             className="
             cursor-pointer 
@@ -119,16 +125,41 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
               text-white
               group-hover/item:text-neutral-300
               "/>
+            </div> */}
+            <div className="ml-auto">
+              <a
+                className="cursor-pointer
+                w-6
+                h-6
+                lg:w-10
+                lg:h-10
+                bg-white
+                rounded-full
+                flex
+                justify-center
+                items-center
+                transition
+                hover:bg-neutral-300
+                "
+                target="_blank"
+                href={trailer}
+              >
+                <BsFillPlayFill size={30} />
+              </a>
             </div>
           </div>
           <p className="text-green-400 font-semibold mt-4">
             New <span className="text-white">2023</span>
           </p>
           <div className="flex flex-row mt-4 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">{data.duration}</p>
+            <p className="text-white text-[10px] lg:text-sm">
+              Ep: {data.duration}
+            </p>
           </div>
           <div className="flex flex-row mt-4 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">{data.genre}</p>
+            <p className="text-white text-[10px] lg:text-sm">
+              Genres: {data.genre}
+            </p>
           </div>
         </div>
       </div>
