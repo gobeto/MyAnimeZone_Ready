@@ -24,7 +24,7 @@ function AddMovie({ onClose }: AddMovieProps) {
   
     const movie = { title, description, videoUrl, thumbnaiUrl,posterUrl, genre, duration };
     try {
-      await axios.post('/api/animeAdd', movie);
+      await axios.put('/api/animeEdit', movie);
       onClose();
     } catch (error) {
       console.error(error);
@@ -42,7 +42,7 @@ function AddMovie({ onClose }: AddMovieProps) {
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 cursor-pointer" onClick={onClose}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" /> 
             </svg>
-            <p className="font-bold text-2xl text-center flex-grow">Add new anime</p>
+            <p className="font-bold text-2xl text-center flex-grow">Edit anime</p>
           </div>
           <div>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" className="p-2 border rounded w-full" required pattern=".{3,}" title="3 characters minimum" />

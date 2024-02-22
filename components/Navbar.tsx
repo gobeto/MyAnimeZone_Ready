@@ -89,8 +89,7 @@ const Navbar = () => {
           <Link href="/">
             <NavbarItem label="Home" />
           </Link>
-          <NavbarItem label="Series" />
-          <NavbarItem label="Films" />
+
           {/* check if the isAdmin is true and if it is visualise button */}
           {isAdmin && (
             <NavbarItem
@@ -117,13 +116,9 @@ const Navbar = () => {
           />
           <MobileMenu visible={showMobileMenu} />
         </div>
+        {/* lqva chast */}
         <div className="flex flex-row ml-auto gap-7 items-center">
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <BsSearch />
-          </div>
-          <div className="text-gray-200 hover:text-gray-300 cursor-pointer transition">
-            <BsBell />
-          </div>
+
 
           <div
             onClick={toggleAccountMenu}

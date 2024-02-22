@@ -49,7 +49,7 @@ const LibraryButton: React.FC<LibraryButtonProps> = ({ movieId }) => {
         h-6
         lg:w-10
         lg:h-10
-        border-white
+        border-slate-500
         border-2
         rounded-full
         flex
@@ -57,9 +57,10 @@ const LibraryButton: React.FC<LibraryButtonProps> = ({ movieId }) => {
         items-center
         transition
         hover:border-netural-300
+        hover:bg-slate-500
         "
     >
-      <Icon className="text-white " size={25} />
+      <Icon className="text-slate-500 hover:text-white " size={25} />
     </div>
   );
 };

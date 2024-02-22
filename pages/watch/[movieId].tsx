@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useMovie from "@/hooks/useMovie";
 import { useRouter } from "next/router";
 import { AiOutlineArrowLeft } from "react-icons/ai";
@@ -9,12 +9,31 @@ import WatchingButton from "@/components/WatchingButton";
 import LibraryButton from "@/components/LibraryButton";
 import WantToWatchButton from "@/components/WantToWatchButton";
 import CompletedButton from "@/components/CompletedButton";
+import EditButton from "@/components/EditAnimeButton";
+import DeleteButton from "@/components/DeleteAnimeButton";
+import NavbarItem from "@/components/NavbarItem";
+import axios from "axios";
 
 const Watch = () => {
   const router = useRouter();
   const { movieId } = router.query;
 
   const { data } = useMovie(movieId as string);
+
+  const [showEditButton, setshowEditButton] = useState(false);
+
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    axios
+      .get("/api/current")
+      .then((response) => {
+        setIsAdmin(response.data.isAdmin);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }, []);
 
   return (
     <>
@@ -33,7 +52,7 @@ const Watch = () => {
             <p className="font-bold">Genres: {data?.genre}</p>
             <p className="font-bold">Episodes: {data?.duration}</p>
           </div>
-          <div className="space-y-4 border border-gray-300 rounded p-10 w-2xl">
+          <div className="space-y-4  border border-slate-500 rounded p-10 w-2xl">
             <div className="flex items-center ">
               <FavoriteButton movieId={data?.id} />
               <p className="ml-2">Favorite</p>
@@ -46,14 +65,26 @@ const Watch = () => {
               <WatchingButton movieId={data?.id} />
               <p className="ml-2">Watching</p>
             </div>
-            <div className="flex items-center w-xl">
+            <div className="flex items-center w-xl ">
               <WantToWatchButton movieId={data?.id} />
-              <p className="ml-2 w-10">Want to watch</p>
+              <p className="ml-2 w-10 ">Want to watch</p>
             </div>
             <div className="flex items-center ">
               <CompletedButton movieId={data?.id} />
               <p className="ml-2">Completed</p>
             </div>
+            {/* <EditButton />
+            <DeleteButton /> */}
+
+            {isAdmin && (
+            <NavbarItem
+              label="Edit"
+              onClick={() => setshowEditButton(!showEditButton)}
+            />
+          )}
+          {showEditButton && (
+            <EditButton onClose={() => setshowEditButton(false)} />
+          )}
           </div>
         </div>
       </div>

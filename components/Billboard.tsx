@@ -40,7 +40,7 @@ const Billboard = () => {
         h-[56.25vw]
         object-cover
         brightness-[60%]"
-        src={data?.thumbnaiUrl}
+        src={data?.posterUrl}
         alt="thumnail"
       />
       <div className="absolute top-[30%] md:top-[40%] ml-4 md:ml-16">

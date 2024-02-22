@@ -19,19 +19,20 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
   const { openModal } = useInfoModal();
   return (
     //ot tuk se promenq razmera na img za animeta v main page
-    <div className="group bg-slate-500 col-span relative  w-[18vw] h-[22vw]">
+    <div className="group bg-slate-500 col-span relative rounded-xl  w-[18vw] h-[22vw]">
       <img
         className="cursor-pointer 
             object-cover
             transition
             duration
             shadow-xl
-            rounded-md
+            rounded-xl
             group-hover:opacity-90
             sm:group-hover:opacity-0
             delay-300
             w-[18vw]
-            h-[22vw]"
+            h-[22vw]
+            "
         src={data.thumbnaiUrl}
         alt="Thumbnail"
       />
@@ -46,7 +47,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
             invisible
             sm:visible
             delay-300
-            w-[16vw]
+            w-[20vw]
             scale-0
             group-hover:scale-110
             gropu-hover: -translate-y-[3vw]
@@ -60,7 +61,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
                 transition
                 duration
                 shadow-xl
-                rounded-t-md
+                rounded-t-xl
                 w-full
                 h-[15vw]
                 "
@@ -70,14 +71,14 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
         <div
           className="
                 z-10
-                bg-zinc-800
+                bg-slate-500
                 p-2
                 lg:p-4
                 absolute
                 w-full
                 transition
                 shadow-md
-                rounded b-md
+                rounded b-xl
                 "
         >
           <div className="flex flex-row items-center gap-3">
@@ -100,7 +101,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
             >
               <AiOutlineInfoCircle size={25} />
             </div>
-            <FavoriteButton movieId={data?.id} />
+            {/* <FavoriteButton movieId={data?.id} /> */}
             {/* <div 
             onClick={()=>openModal(data?.id)}
             className="
@@ -126,7 +127,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
               group-hover/item:text-neutral-300
               "/>
             </div> */}
-            <div className="ml-auto">
+            <div className="">
+              {/* ml-auto */}
               <a
                 className="cursor-pointer
                 w-6
@@ -148,9 +150,11 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
               </a>
             </div>
           </div>
-          <p className="text-green-400 font-semibold mt-4">
-            New <span className="text-white">2023</span>
-          </p>
+          <div className="flex flex-row mt-4 gap-2 items-center">
+            <p className="text-white text-[10px] lg:text-sm">
+              {data.title}
+            </p>
+          </div>
           <div className="flex flex-row mt-4 gap-2 items-center">
             <p className="text-white text-[10px] lg:text-sm">
               Ep: {data.duration}
