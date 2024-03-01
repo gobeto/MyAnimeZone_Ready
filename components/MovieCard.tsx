@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import useInfoModal from "@/hooks/useInfoModal";
 import { BiChevronDown } from "react-icons/bi";
 import TrailerButton from "./trailerButton";
-
+import { useTranslation } from "react-i18next";
 //hover effect on the movie card
 
 interface MovieCardProps {
@@ -17,6 +17,7 @@ interface MovieCardProps {
 const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
   const router = useRouter();
   const { openModal } = useInfoModal();
+  const { t } = useTranslation();
   return (
     //ot tuk se promenq razmera na img za animeta v main page
     <div className="group bg-slate-500 col-span relative rounded-xl  w-[18vw] h-[22vw]">
@@ -151,18 +152,16 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
             </div>
           </div>
           <div className="flex flex-row mt-4 gap-2 items-center">
+            <p className="text-white text-[10px] lg:text-sm">{data.title}</p>
+          </div>
+          <div className="flex flex-row mt-4 gap-2 items-center">
             <p className="text-white text-[10px] lg:text-sm">
-              {data.title}
+              {t("Episodes")}: {data.duration}
             </p>
           </div>
           <div className="flex flex-row mt-4 gap-2 items-center">
             <p className="text-white text-[10px] lg:text-sm">
-              Ep: {data.duration}
-            </p>
-          </div>
-          <div className="flex flex-row mt-4 gap-2 items-center">
-            <p className="text-white text-[10px] lg:text-sm">
-              Genres: {data.genre}
+              {t("Genres")}: {data.genre}
             </p>
           </div>
         </div>

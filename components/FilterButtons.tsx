@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import useAnime from "@/hooks/useAnimeVisualize";
-
+import { useTranslation } from "react-i18next";
 interface Anime {
   thumbnaiUrl: string | undefined;
   id: string;
@@ -24,6 +24,7 @@ interface AnimeListProps {
 const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
   const [filter, setFilter] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState("");
+  const { t } = useTranslation();
   const [anime, loading, error] = useAnime({
     sort: "title",
     filter: "action",
@@ -69,7 +70,7 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
           </svg>
           <input
             type="text"
-            placeholder="Search in your library"
+            placeholder={t("Search in your library")}
             className="focus:outline-none cursor-pointer w-96 h-10 pl-2 pr-2 rounded-lg bg-transparent"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -84,7 +85,7 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
           text-center me-2 mb-2 "
           onClick={() => setFilter("completedIds")}
         >
-          Completed
+          {t("Completed")}
         </button>
         <button
           className="text-bg-slate-500 hover:text-white border-2 border-gray-300 hover:bg-slate-500 
@@ -92,7 +93,7 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
           text-center me-2 mb-2 "
           onClick={() => setFilter("wantToWatchIds")}
         >
-          Want to Watch
+          {t("Want to watch")}
         </button>
         <button
           className="text-bg-slate-500 hover:text-white border-2 border-gray-300 hover:bg-slate-500 
@@ -100,7 +101,7 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
           text-center me-2 mb-2 "
           onClick={() => setFilter("watchingIds")}
         >
-          Watching
+          {t("Watching")}
         </button>
         <button
           className="text-bg-slate-500 hover:text-white border-2 border-gray-300 hover:bg-slate-500 
@@ -108,7 +109,7 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
           text-center me-2 mb-2 "
           onClick={() => setFilter("libraryAnimeIds")}
         >
-          Library
+          {t("Library")}
         </button>
         <button
           className="text-bg-slate-500 hover:text-white border-2 border-gray-300 hover:bg-slate-500 
@@ -127,7 +128,7 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
               className="m-4 p-4 border-2 border-gray-300 text-white"
               key={anime.id}
             >
-              <Link href={`/anime/${anime.id}`} key={anime.id}>
+              <Link href={`/watch/${anime.id}`} key={anime.id}>
                 <img
                   className="w-60 h-72 object-cover"
                   src={anime.thumbnaiUrl}

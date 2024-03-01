@@ -1,13 +1,15 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { signOut } from "next-auth/react";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface AccountMenuProps {
   visible?: boolean;
 }
 
 const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
-const {data} = useCurrentUser();
+  const { data } = useCurrentUser();
+  const { t } = useTranslation();
 
   if (!visible) {
     return null;
@@ -27,8 +29,11 @@ const {data} = useCurrentUser();
           </p>
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />
-        <div onClick={()=>signOut()} className="px-3 text-center text-white text-sm hover:underline">
-          Sign out
+        <div
+          onClick={() => signOut()}
+          className="px-3 text-center text-white text-sm hover:underline"
+        >
+          {t("Sign out")}
         </div>
       </div>
     </div>

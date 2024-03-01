@@ -1,6 +1,9 @@
 import { BsFillPlayFill } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
 
 export default function TrailerButton({trailer}: {trailer: string}) {
+    const { t } = useTranslation();
+
     return (
         <a 
         className="bg-white
@@ -20,7 +23,7 @@ export default function TrailerButton({trailer}: {trailer: string}) {
         target="_blank"
         href={trailer}>
             <BsFillPlayFill className="mr-1" />
-             Play trailer</a>
+            {t("Trailer")}</a>
     )
 
 }

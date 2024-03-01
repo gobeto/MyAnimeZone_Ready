@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import{AiOutlineInfoCircle} from 'react-icons/ai';
+import { useTranslation } from "react-i18next";
 
 //info button which redirect to individual anime page - Billboard
 
@@ -10,6 +11,7 @@ interface PlayButtonProps{
 
 const PlayButton: React.FC<PlayButtonProps> = ({movieId})=>{
     const router = useRouter();
+    const { t } = useTranslation();
 
     return(
         <button
@@ -30,7 +32,7 @@ const PlayButton: React.FC<PlayButtonProps> = ({movieId})=>{
         "
         >
             <AiOutlineInfoCircle className=" mr-1" />
-            Info
+            {t("Info")}
         </button>
     )
 };

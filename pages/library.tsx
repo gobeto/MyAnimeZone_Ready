@@ -5,6 +5,7 @@ import MovieList from "@/components/MovieList";
 import useFavorites from "@/hooks/useFavorites";
 import AnimesLibrary from "@/components/animesLibrary";
 import ScrollButton from "@/components/ScrollButton";
+import Footer from "@/components/Footer";
 //import AnimeFilterButtons from "@/components/AnimeFilterButtons";
 
 
@@ -30,6 +31,7 @@ function AnimeVisualize() {
       </div>
       {/* <MovieList title="Favorites" data={favorites} /> */}
       <ScrollButton />
+      <Footer />
     </>
   );
 }

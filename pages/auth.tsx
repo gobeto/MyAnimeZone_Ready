@@ -2,10 +2,12 @@ import Input from "@/components/input";
 import { useCallback, useState } from "react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
+import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 
-import {FcGoogle} from 'react-icons/fc'
-import {FaGithub} from 'react-icons/fa'
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
+import Email from "next-auth/providers/email";
 
 const Auth = () => {
   const router = useRouter();
@@ -14,6 +16,8 @@ const Auth = () => {
   const [password, setPassword] = useState("");
 
   const [variant, setVariant] = useState("login");
+
+  const { t } = useTranslation();
 
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
@@ -53,32 +57,32 @@ const Auth = () => {
   return (
     <div className="relative h-full w-full bg-[url('/images/SAOcastle.png')] bg-no-repeat bg-conter bg-fixed bg-cover">
       <div className="bg-black w-full h-full lg:bg-opacity-50">
-        <nav className="px-12 py-5">
+        <nav className="px-12 py-2">
           {/* <img src="/images/logoOni.png" alt="logo" className="h-12" /> */}
         </nav>
         <div className="flex justify-center mt-20">
-          <div className="bg-black bg-opacity-70 px-16 py-16 self-conter mt-2 lg:w-2/5 lg:max-w-md rounded-md w-full">
+          <div className="bg-black bg-opacity-70 px-16 py-16 self-conter mt-2 lg:w-2/5 lg:max-w-md rounded-md w-96">
             <h2 className="text-white text-4xl mb-8 font-semibold">
-              {variant == "login" ? "Sign in " : "Register"}
+              {variant == "login" ? t("Sign in") : t("Register")}
             </h2>
             <div className="flex flex-col gap-4">
               {variant == "register" && (
                 <Input
-                  label="Username"
+                  label={t("Username")}
                   onChange={(ev: any) => setName(ev.target.value)}
                   id="name"
                   value={name}
                 />
               )}
               <Input
-                label="Email"
+                label={t("Email")}
                 onChange={(ev: any) => setEmail(ev.target.value)}
                 id="email"
                 type="email"
                 value={email}
               />
               <Input
-                label="Password"
+                label={t("Password")}
                 onChange={(ev: any) => setPassword(ev.target.value)}
                 id="password"
                 type="password"
@@ -87,13 +91,13 @@ const Auth = () => {
             </div>
             <button
               onClick={variant == "login" ? login : register}
-              className="bg-red-600 py-3 text-white rounded-md w-full mt-10 hover:bg-red-700 transition"
+              className="bg-slate-500 py-3 text-white rounded-md w-full mt-10 hover:bg-slate-700 transition"
             >
-              {variant == "login" ? "Login" : "Sign up"}
+              {variant == "login" ? t("Login") : t("Sign up")}
             </button>
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
-                <div 
-                onClick={()=>signIn('google',{callbackUrl: '/'})}
+              <div
+                onClick={() => signIn("google", { callbackUrl: "/" })}
                 className="
                 w-10
                 h-10
@@ -105,12 +109,13 @@ const Auth = () => {
                 cursor-pointer
                 hover:opacity-80
                 transition
-                ">
-                  <FcGoogle size={30}/>
-                </div>
-                <div 
-                onClick={()=>signIn('github',{callbackUrl: '/'})}
-                 className="
+                "
+              >
+                <FcGoogle size={30} />
+              </div>
+              <div
+                onClick={() => signIn("github", { callbackUrl: "/" })}
+                className="
                 w-10
                 h-10
                 bg-white
@@ -121,19 +126,20 @@ const Auth = () => {
                 cursor-pointer
                 hover:opacity-80
                 transition
-                ">
-                  <FaGithub size={30}/>
-                </div>
+                "
+              >
+                <FaGithub size={30} />
+              </div>
             </div>
             <p className="text-neutral-500 mt-12">
               {variant == "login"
-                ? "First time using MyZone?"
-                : "Already have an acount?"}
+                ? t("First time using MyAnimeZone?")
+                : t("Already have an account?")}
               <span
                 onClick={toggleVariant}
                 className="text-white ml-1 hover:underline cursor-pointer"
               >
-                {variant == "login" ? "Create account" : "Login"}
+                {variant == "login" ? t("Create account") : t("Login")}
               </span>
             </p>
           </div>

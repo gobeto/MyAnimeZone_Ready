@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import Link from "next/link";
 //>
 //<
@@ -9,6 +10,7 @@ import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
 import AccountMenu from "./AccountMenu";
 import AnimeAddForm from "./AnimeAddForm";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const TOP_OFFSET = 66;
 
@@ -17,6 +19,8 @@ const Navbar = () => {
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showBackground, setShowBackground] = useState(false);
   const [showAddMovieForm, setShowAddMovieForm] = useState(false);
+  const { t } = useTranslation();
+
   //>//<
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -76,7 +80,7 @@ const Navbar = () => {
             `}
       >
         <img className="h-10 lg:h-20   " src="/images/logoOni.png" alt="Logo" />
-        <p className="text-black p-4 font-bold lg:text-xl ">MyAnimeZone</p>
+        <p className="text-white p-4 font-bold lg:text-xl ">MyAnimeZone</p>
         <div
           className="
                 flex-row
@@ -87,13 +91,15 @@ const Navbar = () => {
                 "
         >
           <Link href="/">
-            <NavbarItem label="Home" />
+            <NavbarItem label={t("Home")} />
           </Link>
+
+          
 
           {/* check if the isAdmin is true and if it is visualise button */}
           {isAdmin && (
             <NavbarItem
-              label="Add Anime"
+              label={t("Add anime")}
               onClick={() => setShowAddMovieForm(!showAddMovieForm)}
             />
           )}
@@ -101,16 +107,17 @@ const Navbar = () => {
             <AnimeAddForm onClose={() => setShowAddMovieForm(false)} />
           )}
           <Link href="/library">
-            <NavbarItem label="My Library" />
+            <NavbarItem label={t("Library")} />
           </Link>
         </div>
+
         <div
           onClick={toggleMobileMenu}
           className="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative"
         >
-          <p className="text-black text-sm">Browse</p>
+          <p className="text-white text-sm">{t("Menu")}</p>
           <BsChevronDown
-            className={`text-black transition ${
+            className={`text-white transition ${
               showMobileMenu ? "rotate-180" : "rotate-0"
             }`}
           />
@@ -118,8 +125,7 @@ const Navbar = () => {
         </div>
         {/* lqva chast */}
         <div className="flex flex-row ml-auto gap-7 items-center">
-
-
+        <LanguageSwitcher />
           <div
             onClick={toggleAccountMenu}
             className="flex flex-row items-center gap-2 cursor-pointer relative"
@@ -128,7 +134,7 @@ const Navbar = () => {
               <img src="/images/default-blue.png" alt="" />
             </div>
             <BsChevronDown
-              className={`text-black transition ${
+              className={`text-white transition ${
                 showAccountMenu ? "rotate-180" : "rotate-0"
               }`}
             />

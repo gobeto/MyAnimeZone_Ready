@@ -469,3 +469,70 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
   );
 };
 export default MovieCard;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+import React from "react";
+import axios from "axios";
+import router from "next/router";
+
+interface DeleteMovieProps {
+  onClose: () => void;
+  movie: { id: string };
+}
+
+function DeleteMovie({onClose, movie }: DeleteMovieProps) {
+  
+  const deleteMovie = async () => {
+    try {
+      const response = await axios.delete("/api/animeDelete", {
+        data: { id: movie.id },
+      });
+      console.log(response.data);
+      window.location.reload();
+      router.push("/"); // replace with your redirect path
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleClose = () => {
+    console.log('SVG clicked');
+    // Add your logic here for what should happen when the SVG is clicked
+  };
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50 ">
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="flex flex-col space-y-4 bg-slate-100 p-8 rounded w-3/4 h-auto max-w-3xl ">
+          <div className="flex justify-between items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 cursor-pointer"
+              onClick={onClose}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
+            </svg>
+          </div>
+          <p>Are are you sure !!!</p>
+          <button
+            onClick={deleteMovie}
+            className="p-2 bg-red-500 text-white rounded w-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+          >
+            Delete Movie
+          </button>
+          <div>
+            <button type="button" onClick={onClose} className="p-2 bg-red-500 text-white rounded w-full">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default DeleteMovie;

@@ -10,6 +10,8 @@ import InfoModal from "@/components/infoModal";
 import useInfoModal from "@/hooks/useInfoModal";
 import ScrollButton from "@/components/ScrollButton";
 import Footer from "@/components/Footer";
+import { useTranslation } from "react-i18next";
+
 
 
 //check if available session exist and if it doesnt it redirect to /auth
@@ -33,7 +35,7 @@ export default function Home() {
   const{ data: movies = []} = useMovieList();
   const{ data: favorites = [] } = useFavorites();
   const {isOpen,closeModal} = useInfoModal();
-
+  const { t } = useTranslation();
   return (
     <>
     <InfoModal visible={isOpen} onClose={closeModal}/>
@@ -42,7 +44,7 @@ export default function Home() {
       </nav>
       <Billboard />
       <div className="pd-40">
-        <MovieList title="Trending Now" data={movies} />
+        <MovieList title={t("All Animes")} data={movies} />
       </div>
       <ScrollButton />
       <Footer />

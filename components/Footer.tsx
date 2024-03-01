@@ -1,9 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="bg-slate-500 text-white p-4 mt-10 text-center">
-      <p>Explore Your Anime Universe with MyAnimeZone!</p>
+      <p>{t("Explore Your Anime Universe with MyAnimeZone!")}</p>
       <div className="flex items-center justify-center gap-1 text-white">
         <svg
           fill="#ffffff"
@@ -32,7 +34,7 @@ const Footer = () => {
           <path d="M20.9,2H3.1A1.1,1.1,0,0,0,2,3.1V20.9A1.1,1.1,0,0,0,3.1,22h9.58V14.25h-2.6v-3h2.6V9a3.64,3.64,0,0,1,3.88-4,20.26,20.26,0,0,1,2.33.12v2.7H17.3c-1.26,0-1.5.6-1.5,1.47v1.93h3l-.39,3H15.8V22h5.1A1.1,1.1,0,0,0,22,20.9V3.1A1.1,1.1,0,0,0,20.9,2Z" />
         </svg>
       </div>
-      <p>&copy; {new Date().getFullYear()} MyAnimeZone. All rights reserved.</p>
+      <p>&copy; {new Date().getFullYear()} MyAnimeZone. {t("All rights reserved")}</p>
     </footer>
   );
 };
