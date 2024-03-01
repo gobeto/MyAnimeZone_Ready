@@ -4,6 +4,7 @@ import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useFavorites from "@/hooks/useFavorites"; 
+import Swal from "sweetalert2";
 
 interface FavoriteButtonProps {
   movieId: string;
@@ -24,8 +25,22 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
     // check if the movie is favorite and if it is, delete it
     if (isFavorite) {
       response = await axios.delete("/api/favorite", { data: { movieId } });
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "This anime has been removed from favorites",
+        showConfirmButton: false,
+        timer: 1500
+      });
     } else {
       response = await axios.post("/api/favorite", { movieId });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "This anime has been added to favorites",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
 
     const updatedFavoriteIds = response?.data?.favoriteIds;

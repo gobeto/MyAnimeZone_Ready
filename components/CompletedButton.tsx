@@ -4,6 +4,7 @@ import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useCompleted from "@/hooks/useCompleted"; 
+import Swal from "sweetalert2";
 
 interface CompletedButtonProps {
   movieId: string;
@@ -24,8 +25,22 @@ const CompletedButton: React.FC<CompletedButtonProps> = ({ movieId }) => {
     // check if the movie is completed and if it is, delete it
     if (isCompleted) {
       response = await axios.delete("/api/completed", { data: { movieId } });
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "This anime has been removed from your completed list",
+        showConfirmButton: false,
+        timer: 1500
+      });
     } else {
       response = await axios.post("/api/completed", { movieId });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "This anime has been added to your comleted list",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
 
     const updatedCompletedIds = response?.data?.completedIds;

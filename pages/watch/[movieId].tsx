@@ -81,8 +81,7 @@ const Watch = () => {
               <CompletedButton movieId={data?.id} />
               <p className="ml-2">{t("Completed")}</p>
             </div>
-            {/* <EditButton />
-            <DeleteButton /> */}
+
 
             {isAdmin && (
               <div
@@ -120,8 +119,10 @@ const Watch = () => {
               >
                 <NavbarItem
                   label={t("Delete")}
-                  onClick={() => setshowDeleteButton(!showDeleteButton)}
-                />
+                  onClick={() => setshowDeleteButton(!showDeleteButton)}                />
+
+
+
               </div>
             )}
             {showDeleteButton && (

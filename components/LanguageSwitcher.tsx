@@ -5,17 +5,17 @@ function LanguageSwitcher() {
   const { i18n } = useTranslation();
   const { t } = useTranslation();
 
-  // const switchLanguage = () => {
-  //   i18n.language === "en"
-  //     ? i18n.changeLanguage("bg")
-  //     : i18n.changeLanguage("en");
-  // };
-
   const switchLanguage = () => {
-    const newLang = i18n.language === 'en' ? 'bg' : 'en';
-    i18n.changeLanguage(newLang);
-    localStorage.setItem('i18nextLng', newLang);
+    i18n.language === "en"
+      ? i18n.changeLanguage("bg")
+      : i18n.changeLanguage("en");
   };
+
+  // const switchLanguage = () => {
+  //   const newLang = i18n.language === 'en' ? 'bg' : 'en';
+  //   i18n.changeLanguage(newLang);
+  //   localStorage.setItem('i18nextLng', newLang);
+  // };
 
   return (
     // <button onClick={switchLanguage}>

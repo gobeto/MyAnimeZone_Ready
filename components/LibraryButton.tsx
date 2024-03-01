@@ -4,6 +4,7 @@ import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLibrary from "@/hooks/useLibrary"; 
+import Swal from "sweetalert2";
 
 interface LibraryButtonProps {
   movieId: string;
@@ -24,8 +25,22 @@ const LibraryButton: React.FC<LibraryButtonProps> = ({ movieId }) => {
     // check if the movie is library and if it is, delete it
     if (isLibrary) {
       response = await axios.delete("/api/myLibrary", { data: { movieId } });
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "This anime has been removed from your library list",
+        showConfirmButton: false,
+        timer: 1500
+      });
     } else {
       response = await axios.post("/api/myLibrary", { movieId });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "This anime has been added to your library",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
 
     const updatedLibraryIds = response?.data?.libraryAnimeIds;

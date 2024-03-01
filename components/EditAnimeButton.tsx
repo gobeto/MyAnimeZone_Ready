@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import Swal from "sweetalert2";
 
 interface AddMovieProps {
   onClose: () => void;
@@ -40,6 +41,13 @@ function AddMovie({ onClose, movie }: AddMovieProps) {
     };
     try {
       await axios.put("/api/animeEdit", updatedMovie);
+      await Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "This anime has been edited successfully",
+        showConfirmButton: false,
+        timer: 1500
+      });
       window.location.reload();
     } catch (error) {
       console.error(error);

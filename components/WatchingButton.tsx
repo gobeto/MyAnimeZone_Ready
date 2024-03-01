@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useCallback, useMemo } from "react";
 import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 
+import Swal from "sweetalert2";
+
+
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useWatching from "@/hooks/useWatching"; 
 
@@ -24,8 +27,22 @@ const WatchingButton: React.FC<WatchingButtonProps> = ({ movieId }) => {
     // check if the movie is watching and if it is, delete it
     if (isWatching) {
       response = await axios.delete("/api/watching", { data: { movieId } });
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "This anime has been removed from your watching list",
+        showConfirmButton: false,
+        timer: 1500
+      });
     } else {
       response = await axios.post("/api/watching", { movieId });
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "This anime has been added to your watching list",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
 
     const updatedWatchingIds = response?.data?.watchingIds;
