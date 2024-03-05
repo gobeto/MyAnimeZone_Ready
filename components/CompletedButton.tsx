@@ -5,6 +5,8 @@ import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useCompleted from "@/hooks/useCompleted"; 
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
+
 
 interface CompletedButtonProps {
   movieId: string;
@@ -13,6 +15,7 @@ interface CompletedButtonProps {
 const CompletedButton: React.FC<CompletedButtonProps> = ({ movieId }) => {
   const { mutate: mutateCompleted } = useCompleted();
   const { data: currentUser, mutate } = useCurrentUser();
+  const { t } = useTranslation();
 
   const isCompleted = useMemo(() => {
     const list = currentUser?.completedIds || [];
@@ -28,7 +31,7 @@ const CompletedButton: React.FC<CompletedButtonProps> = ({ movieId }) => {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: "This anime has been removed from your completed list",
+        title: t("This anime has been removed from your completed list"),
         showConfirmButton: false,
         timer: 1500
       });
@@ -37,7 +40,7 @@ const CompletedButton: React.FC<CompletedButtonProps> = ({ movieId }) => {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "This anime has been added to your comleted list",
+        title: t("This anime has been added to your completed list"),
         showConfirmButton: false,
         timer: 1500
       });

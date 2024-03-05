@@ -8,12 +8,14 @@ import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import Email from "next-auth/providers/email";
+import Swal from "sweetalert2";
 
 const Auth = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [variant, setVariant] = useState("login");
 
@@ -27,16 +29,28 @@ const Auth = () => {
 
   const login = useCallback(async () => {
     try {
-      await signIn("credentials", {
+      const result = await signIn("credentials", {
         email,
         password,
         redirect: false,
         callbackUrl: "/",
       });
 
-      router.push("/");
+      if (result?.error) {
+        setErrorMessage("Account does not exist");
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: t("Wrong email or password"),
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        router.push("/");
+      }
     } catch (error) {
       console.log(error);
+      setErrorMessage("An error occurred");
     }
   }, [email, password, router]);
 

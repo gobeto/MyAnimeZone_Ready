@@ -5,6 +5,8 @@
 
 body{
     @apply bg-slate-100 h-full overflow-x-hidden;
+        font-family: 'Madimi One', cursive;
+    
 }
 
 #__next{
@@ -19,4 +21,32 @@ html{
 
 input:checked ~ span:last-child {
     --tw-translate-x: 1.75rem; /* translate-x-7 */
+  }
+  
+  /* styles.css */
+
+.btn-confirm {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  
+  .btn-cancel {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
   }

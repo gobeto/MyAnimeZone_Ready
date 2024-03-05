@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useCallback, useMemo } from "react";
 import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
+
 
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useWantToWatch from "@/hooks/useWantToWatch"; 
@@ -13,6 +15,7 @@ interface WantToWatchButtonProps {
 const WantToWatchButton: React.FC<WantToWatchButtonProps> = ({ movieId }) => {
   const { mutate: mutateWantToWatch } = useWantToWatch();
   const { data: currentUser, mutate } = useCurrentUser();
+  const { t } = useTranslation();
 
   const isWantToWatch = useMemo(() => {
     const list = currentUser?.wantToWatchIds || [];
@@ -28,7 +31,7 @@ const WantToWatchButton: React.FC<WantToWatchButtonProps> = ({ movieId }) => {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: "This anime has been removed from your want to watch list",
+        title: t("This anime has been removed from your want to watch list"),
         showConfirmButton: false,
         timer: 1500
       });
@@ -39,7 +42,7 @@ const WantToWatchButton: React.FC<WantToWatchButtonProps> = ({ movieId }) => {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "This anime has been added to your want to watch list",
+        title: t("This anime has been added to your want to watch list"),
         showConfirmButton: false,
         timer: 1500
       });

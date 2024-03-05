@@ -117,7 +117,7 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
           text-center me-2 mb-2 "
           onClick={() => setFilter("")}
         >
-          All
+          {t("All")}
         </button>
       </div>
 

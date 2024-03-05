@@ -5,6 +5,8 @@ import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useFavorites from "@/hooks/useFavorites"; 
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
+
 
 interface FavoriteButtonProps {
   movieId: string;
@@ -13,6 +15,7 @@ interface FavoriteButtonProps {
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
   const { mutate: mutateFavorites } = useFavorites();
   const { data: currentUser, mutate } = useCurrentUser();
+  const { t } = useTranslation();
 
   const isFavorite = useMemo(() => {
     const list = currentUser?.favoriteIds || [];
@@ -28,7 +31,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: "This anime has been removed from favorites",
+        title: t("This anime has been removed from favorites"),
         showConfirmButton: false,
         timer: 1500
       });
@@ -37,7 +40,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "This anime has been added to favorites",
+        title: t("This anime has been added to favorites"),
         showConfirmButton: false,
         timer: 1500
       });

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import Swal from "sweetalert2";
 
 interface AddMovieProps {
   onClose: () => void;
@@ -44,6 +45,13 @@ function AddMovie({ onClose }: AddMovieProps) {
     try {
       await axios.post("/api/animeAdd", movie);
       onClose();
+      await Swal.fire({
+        position: "center",
+        icon: "success",
+        title: t("This anime has been added successfully"),
+        showConfirmButton: false,
+        timer: 1500
+      });
       window.location.reload();
     } catch (error) {
       console.error(error);

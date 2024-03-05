@@ -14,8 +14,17 @@ import EditButton from "@/components/EditAnimeButton";
 import DeleteButton from "@/components/DeleteAnimeButton";
 import NavbarItem from "@/components/NavbarItem";
 import axios from "axios";
+import Swal from "sweetalert2";
 
-const Watch = () => {
+interface DeleteMovieProps {
+  onClose: () => void;
+  movie: { id: string };
+}
+////
+
+///
+
+function Watch({ onClose, movie }: DeleteMovieProps) {
   const router = useRouter();
   const { movieId } = router.query;
 
@@ -23,11 +32,63 @@ const Watch = () => {
 
   const [showEditButton, setshowEditButton] = useState(false);
   const [showDeleteButton, setshowDeleteButton] = useState(false);
-
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: "btn-confirm",
+      cancelButton: "btn-cancel",
+    },
+    buttonsStyling: false,
+  });
   const [isAdmin, setIsAdmin] = useState(false);
 
   const { t } = useTranslation();
 
+  ////
+  const deleteMovie = async () => {
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const response = await axios.delete("/api/animeDelete", {
+              data: { id: data?.id },
+            });
+
+            swalWithBootstrapButtons.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+
+            console.log(response.data);
+            // Redirect to another page
+            await router.push("/");
+            // Reload the window
+            window.location.reload();
+          } catch (error) {
+            console.error(error);
+          }
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your imaginary file is safe :)",
+            icon: "error",
+          });
+        }
+      });
+  };
+  ////
   useEffect(() => {
     axios
       .get("/api/current")
@@ -44,7 +105,7 @@ const Watch = () => {
       <Navbar />
       <div className="flex flex-col items-center justify-center min-h-screen space-y-4">
         <h2 className="font-bold text-3xl mb-5 -mt-20">{data?.title}</h2>
-        <div className="flex flex-col sm:flex-row justify-between items-start w-full max-w-5xl mx-auto gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start w-full max-w-5xl mx-auto gap-1">
           <img
             src={data?.thumbnaiUrl}
             alt={data?.title}
@@ -60,7 +121,7 @@ const Watch = () => {
               {t("Episodes")}: {data?.duration}
             </p>
           </div>
-          <div className="space-y-4  border border-slate-500 rounded p-10 w-2xl">
+          <div className="space-y-4  border border-slate-500 rounded p-10 w-2xl ">
             <div className="flex items-center ">
               <FavoriteButton movieId={data?.id} />
               <p className="ml-2">{t("Favorite")}</p>
@@ -75,19 +136,19 @@ const Watch = () => {
             </div>
             <div className="flex items-center w-xl ">
               <WantToWatchButton movieId={data?.id} />
-              <p className="ml-2 w-10 ">{t("Want to watch")}</p>
+              <p className="ml-2 ">{t("Want to watch")}</p>
             </div>
             <div className="flex items-center ">
               <CompletedButton movieId={data?.id} />
               <p className="ml-2">{t("Completed")}</p>
             </div>
 
-
+            {/* edit button */}
             {isAdmin && (
               <div
                 className="bg-slate-300 text-slate-500 hover:text-white border-2 border-gray-300 hover:bg-slate-500 
                 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 
-                text-center me-2 mb-2 "
+                text-center me-2 mb-2 w-56 h-11"
               >
                 <NavbarItem
                   label={t("Edit")}
@@ -110,18 +171,16 @@ const Watch = () => {
                 }}
               />
             )}
-
-            {isAdmin && (
+            {/* delete button */}
+            {/* {isAdmin && (
               <div
                 className="bg-slate-300 text-slate-500 hover:text-white border-2 border-gray-300 hover:bg-slate-500 
                 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 
-                text-center me-2 mb-2 "
+                text-center me-2 mb-2"
               >
                 <NavbarItem
                   label={t("Delete")}
-                  onClick={() => setshowDeleteButton(!showDeleteButton)}                />
-
-
+                  onClick={() => setshowDeleteButton(!showDeleteButton)} />
 
               </div>
             )}
@@ -132,11 +191,31 @@ const Watch = () => {
                   id: data?.id,
                 }}
               />
+            )} */}
+
+            {/* dlet */}
+
+            {isAdmin && (
+              <div
+                className="bg-slate-300  hover:text-white border-2 border-gray-300 hover:bg-slate-500 
+              focus:ring-4 focus:outline-none focus:ring-gray-300  rounded-lg  px-5 py-2.5 
+              text-center me-2 mb-2 text-white w-56 font-bold h-11 text-sm"
+              >
+                <button
+                  onClick={deleteMovie}
+                  // className="bg-slate-300 hover:text-white border-1 border-gray-300 hover:bg-slate-500
+                  //            focus:ring-4 focus:outline-none focus:ring-gray-300  text-sm px-5 py-2.5
+                  //            text-center me-2 mb-2 text-white rounded w-56 font-bold"
+                  id={data?.id}
+                >
+                  {t("Delete anime")}
+                </button>
+              </div>
             )}
           </div>
         </div>
       </div>
     </>
   );
-};
+}
 export default Watch;

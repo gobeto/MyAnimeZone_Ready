@@ -5,6 +5,8 @@ import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useLibrary from "@/hooks/useLibrary"; 
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
+
 
 interface LibraryButtonProps {
   movieId: string;
@@ -13,6 +15,7 @@ interface LibraryButtonProps {
 const LibraryButton: React.FC<LibraryButtonProps> = ({ movieId }) => {
   const { mutate: mutateLibrary } = useLibrary();
   const { data: currentUser, mutate } = useCurrentUser();
+  const { t } = useTranslation();
 
   const isLibrary = useMemo(() => {
     const list = currentUser?.libraryAnimeIds || [];
@@ -28,7 +31,7 @@ const LibraryButton: React.FC<LibraryButtonProps> = ({ movieId }) => {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: "This anime has been removed from your library list",
+        title: t("This anime has been removed from your library list"),
         showConfirmButton: false,
         timer: 1500
       });
@@ -37,7 +40,7 @@ const LibraryButton: React.FC<LibraryButtonProps> = ({ movieId }) => {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "This anime has been added to your library",
+        title: t("This anime has been added to your library"),
         showConfirmButton: false,
         timer: 1500
       });

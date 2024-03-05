@@ -4,6 +4,11 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 
+
+///
+//delete
+////
+
 interface DeleteMovieProps {
   onClose: () => void;
   movie: { id: string };
@@ -42,6 +47,7 @@ function DeleteMovie({ onClose, movie }: DeleteMovieProps) {
       // Redirect to another page
       await router.push("/");
       // Reload the window
+      //    //p-2 bg-red-500 text-white rounded w-56 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105
       window.location.reload();
     } catch (error) {
       console.error(error);
@@ -69,16 +75,18 @@ function DeleteMovie({ onClose, movie }: DeleteMovieProps) {
     //         </svg>
     //       </div>
     //       <p> {t("Are you sure you want to delete this anime?")}</p>
-    //p-2 bg-red-500 text-white rounded w-56 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105
+
           <button
             onClick={deleteMovie}
             className=""
+
           >
             {t("Delete anime")}
           </button>
+        
     //     </div>
-    //   </div>
-    // </div>
+    //    </div>
+    //  </div>
   );
 }
 

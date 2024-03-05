@@ -3,6 +3,8 @@ import React, { useCallback, useMemo } from "react";
 import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
+
 
 
 import useCurrentUser from "@/hooks/useCurrentUser";
@@ -15,6 +17,7 @@ interface WatchingButtonProps {
 const WatchingButton: React.FC<WatchingButtonProps> = ({ movieId }) => {
   const { mutate: mutateWatching } = useWatching();
   const { data: currentUser, mutate } = useCurrentUser();
+  const { t } = useTranslation();
 
   const isWatching = useMemo(() => {
     const list = currentUser?.watchingIds || [];
@@ -30,7 +33,7 @@ const WatchingButton: React.FC<WatchingButtonProps> = ({ movieId }) => {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: "This anime has been removed from your watching list",
+        title: t("This anime has been removed from your watching list"),
         showConfirmButton: false,
         timer: 1500
       });
@@ -39,7 +42,7 @@ const WatchingButton: React.FC<WatchingButtonProps> = ({ movieId }) => {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "This anime has been added to your watching list",
+        title: t("This anime has been added to your watching list"),
         showConfirmButton: false,
         timer: 1500
       });

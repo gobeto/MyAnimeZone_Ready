@@ -50,6 +50,32 @@ i18n
           "Sign up": "Sign up",
           "Already have an account?": "Already have an account?",
           "Create account": "Create account",
+          "This anime has been added successfully":
+            "This anime has been added successfully",
+          "This anime has been edited successfully":
+            "This anime has been edited successfully",
+          "This anime has been removed from your completed list":
+            "This anime has been removed from your Completed list",
+          "This anime has been added to your completed list":
+            "This anime has been added to your Completed list",
+          "This anime has been removed from favorites":
+            "This anime has been removed from Favorites",
+          "This anime has been added to favorites":
+            "This anime has been added to Favorites",
+          "This anime has been removed from your library list":
+            "This anime has been removed from your Library list",
+          "This anime has been added to your library":
+            "This anime has been added to your Library list",
+          "This anime has been removed from your watching list":
+            "This anime has been removed from your Watching list",
+          "This anime has been added to your watching list":
+            "This anime has been added to your Watching list",
+          "This anime has been removed from your want to watch list":
+            "This anime has been removed from your Want to watch list",
+          "This anime has been added to your want to watch list":
+            "This anime has been added to your Want to watch list",
+          "Wrong email or password": "Wrong email or password",
+          "All": "All",
         },
       },
       bg: {
@@ -82,7 +108,7 @@ i18n
           Completed: "Завършени",
           "Search in your library": "Търси в библиотеката си",
           "Explore Your Anime Universe with MyAnimeZone!":
-            "Потопи се в света на анимето с MyAnimeZone!",
+            "Потопи се в света на аниметa с MyAnimeZone!",
           "All Animes": "Всички анимета",
           "All rights reserved": "Всички права запазени.",
           "Sign in": "Влез",
@@ -97,6 +123,32 @@ i18n
           "Sign up": "Регистрирай се",
           "Already have an account?": "Вече имаш акаунт?",
           "Create account": "Създай акаунт",
+          "This anime has been added successfully":
+            "Анимето беше добавено успешно",
+          "This anime has been edited successfully":
+            "Анимето беше редактирано успешно",
+          "This anime has been removed from your completed list":
+            "Анимето беше премахнато от Завършени",
+          "This anime has been added to your completed list":
+            "Анимето беше добавено към Завършени",
+          "This anime has been removed from favorites":
+            "Анимето беше премахнато от Любими",
+          "This anime has been added to favorites":
+            "Анимето беше добавено към Любими",
+          "This anime has been removed from your library list":
+            "Анимето беше премахнато от Библиотеката",
+          "This anime has been added to your library":
+            "Анимето беше добавено към Библиотеката",
+          "This anime has been removed from your watching list":
+            "Анимето беше премахнато от В момента гледам",
+          "This anime has been added to your watching list":
+            "Анимето беше добавено към В момента гледам",
+          "This anime has been removed from your want to watch list":
+            "Анимето беше премахнато от За гледане",
+          "This anime has been added to your want to watch list":
+            "Анимето беше добавено към За гледане",
+          "Wrong email or password": "Грешен имейл или парола",
+          "All": "Всички",
         },
       },
       //...other languages...

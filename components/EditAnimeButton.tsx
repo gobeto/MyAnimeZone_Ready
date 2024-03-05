@@ -44,7 +44,7 @@ function AddMovie({ onClose, movie }: AddMovieProps) {
       await Swal.fire({
         position: "center",
         icon: "success",
-        title: "This anime has been edited successfully",
+        title: t("This anime has been edited successfully"),
         showConfirmButton: false,
         timer: 1500
       });
