@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+//potentional issue 
+
 interface Movie {
   status: string;
   id: any;
@@ -20,6 +22,7 @@ interface Options {
 
 const useMovie = (options: Options = {}): [Movie[], boolean, any, (searchTerm: string) => void] => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -29,6 +32,7 @@ const useMovie = (options: Options = {}): [Movie[], boolean, any, (searchTerm: s
       try {
         const response = await axios.get('/api/movies', { params: options });
         setMovies(response.data);
+        setFilteredMovies(response.data);
         setLoading(false);
       } catch (err) {
         setError(err);
@@ -41,14 +45,14 @@ const useMovie = (options: Options = {}): [Movie[], boolean, any, (searchTerm: s
 
   useEffect(() => {
     if (searchTerm === "") {
-      setMovies(movies);
+      setFilteredMovies(movies);
     } else {
-      const filteredMovies = movies.filter((movie) => movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
-      setMovies(filteredMovies);
+      const newFilteredMovies = movies.filter((movie) => movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
+      setFilteredMovies(newFilteredMovies);
     }
-  }, [searchTerm]);
+  }, [searchTerm, movies]);
 
-  return [movies, loading, error, setSearchTerm];
+  return [filteredMovies, loading, error, setSearchTerm];
 };
 
 export default useMovie;

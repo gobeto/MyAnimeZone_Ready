@@ -24,9 +24,13 @@ interface DeleteMovieProps {
 }
 ////
 
+
+
 ///
 
 function Watch({ onClose, movie }: DeleteMovieProps) {
+  const [error, setError] = useState(null);
+
   const router = useRouter();
   const { movieId } = router.query;
 
@@ -99,6 +103,7 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
+        setError(error); // Set the error state
       });
   }, []);
 
@@ -113,6 +118,7 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
             alt={data?.title}
             className="w-full sm:w-1/4 lg:w-1/3 mb-5 sm:mb-0 sm:mr-5 rounded-md"
           />
+          
           <div className="text-left">
             <div className="font-bold w-5xl">{data?.description}</div>
             <br />

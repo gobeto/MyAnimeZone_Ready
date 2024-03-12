@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import NavbarItem from "./NavbarItem";
 import AnimeAddForm from "./AnimeAddForm";
@@ -7,6 +7,8 @@ import axios from "axios";
 interface MobileMenuProps {
   visible?: boolean;
 }
+
+
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ visible }) => {
   if (!visible) {

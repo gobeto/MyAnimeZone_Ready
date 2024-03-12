@@ -21,6 +21,7 @@ const Auth = () => {
 
   const { t } = useTranslation();
 
+  
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
       currentVariant == "login" ? "register" : "login"

@@ -21,6 +21,8 @@ interface AnimeListProps {
   user: User;
 }
 
+
+
 const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
   const [filter, setFilter] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState("");

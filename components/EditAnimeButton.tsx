@@ -16,6 +16,7 @@ interface AddMovieProps {
     duration: string;
   };
 }
+   
 
 function AddMovie({ onClose, movie }: AddMovieProps) {
   const [title, setTitle] = useState(movie.title);
