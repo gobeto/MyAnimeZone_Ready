@@ -8,15 +8,8 @@ interface MobileMenuProps {
   visible?: boolean;
 }
 
-
-
 const MobileMenu: React.FC<MobileMenuProps> = ({ visible }) => {
-  if (!visible) {
-    return null;
-  }
-
   const [showAddMovieForm, setShowAddMovieForm] = useState(false);
-  //>//<
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -29,6 +22,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ visible }) => {
         console.error("Error fetching data: ", error);
       });
   }, []);
+
+  if (!visible) {
+    return null;
+  }
 
   return (
     <div className="bg-black w-56 absolute top-8 left-0 py-5 flex-col border-2 border-gray-800 flex z-50 ">
