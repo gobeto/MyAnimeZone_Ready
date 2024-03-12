@@ -41,7 +41,7 @@ const useMovie = (options: Options = {}): [Movie[], boolean, any, (searchTerm: s
     };
 
     fetchMovies();
-  }, [options]);
+}, [JSON.stringify(options)]);
 
   useEffect(() => {
     if (searchTerm === "") {
