@@ -1,15 +1,28 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { signOut } from "next-auth/react";
+import { GetSessionParams, signOut } from "next-auth/react";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { getSession } from "next-auth/react";
 
 interface AccountMenuProps {
   visible?: boolean;
+}
+export async function getServerSideProps(context: GetSessionParams | undefined) {
+  const session = await getSession(context);
+
+  return {
+    props: {
+      user: session?.user || null,
+    },
+  };
 }
 
 const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { data } = useCurrentUser();
   const { t } = useTranslation();
+
+
+
 
   if (!visible) {
     return null;
