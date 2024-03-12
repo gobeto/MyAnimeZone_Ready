@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import Navbar from "@/components/Navbar";
 import { useTranslation } from "react-i18next";
+import { BsFillPlayFill } from "react-icons/bs";
+
 
 import FavoriteButton from "@/components/FavoriteButton";
 import WatchingButton from "@/components/WatchingButton";
@@ -11,7 +13,6 @@ import LibraryButton from "@/components/LibraryButton";
 import WantToWatchButton from "@/components/WantToWatchButton";
 import CompletedButton from "@/components/CompletedButton";
 import EditButton from "@/components/EditAnimeButton";
-import DeleteButton from "@/components/DeleteAnimeButton";
 import NavbarItem from "@/components/NavbarItem";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -19,6 +20,7 @@ import Swal from "sweetalert2";
 interface DeleteMovieProps {
   onClose: () => void;
   movie: { id: string };
+
 }
 ////
 
@@ -121,6 +123,28 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
               {t("Episodes")}: {data?.duration}
             </p>
           </div>
+          {/* trailer button */}
+          {/* <div>
+            <a
+                className="cursor-pointer
+                w-6
+                h-6
+                lg:w-10
+                lg:h-10
+                bg-white
+                rounded-full
+                flex
+                justify-center
+                items-center
+                transition
+                hover:bg-neutral-300
+                "
+                target="_blank"
+                href={data?.videoUrl}
+              >
+                <BsFillPlayFill size={30} />
+              </a>
+            </div> */}
           <div className="space-y-4  border border-slate-500 rounded p-10 w-2xl ">
             <div className="flex items-center ">
               <FavoriteButton movieId={data?.id} />
@@ -143,6 +167,7 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
               <p className="ml-2">{t("Completed")}</p>
             </div>
 
+            
             {/* edit button */}
             {isAdmin && (
               <div

@@ -21,7 +21,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
         <div className="px-3 group/item flex flex-row gap-3 item center w-full">
           <img
             className="w-8 rounded-md"
-            src="/images/default-blue.png"
+            src="/images/logoOni.png"
             alt=""
           />
           <p className="text-white text-sm group-hover/item:underline">

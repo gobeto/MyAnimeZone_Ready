@@ -79,8 +79,8 @@ const Navbar = () => {
             ${showBackground ? "bg-slate-500 bg-opacity-100" : ""}
             `}
       >
-        <img className="h-10 lg:h-20   " src="/images/logoOni.png" alt="Logo" />
-        <p className="text-white p-4 font-bold lg:text-xl ">MyAnimeZone</p>
+        <img className="h-10 lg:h-20  " src="/images/WebSiteLogo.png" alt="Logo" />
+        {/* <p className="text-white p-4 font-bold lg:text-xl ">MyAnimeZone</p> */}
         <div
           className="
                 flex-row
@@ -130,9 +130,11 @@ const Navbar = () => {
             onClick={toggleAccountMenu}
             className="flex flex-row items-center gap-2 cursor-pointer relative"
           >
-            <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden relative">
-              <img src="/images/default-blue.png" alt="" />
-            </div>
+            {/* <Link href={`/auth`}> */}
+              <div className="w-10 h-10 lg:w-10 lg:h-10 rounded-md overflow-hidden relative">
+                <img src="/images/logoOni.png" alt="" />
+              </div>
+            {/* </Link> */}
             <BsChevronDown
               className={`text-white transition ${
                 showAccountMenu ? "rotate-180" : "rotate-0"

@@ -6,7 +6,6 @@ import Billboard from "@/components/Billboard";
 import MovieList from "@/components/MovieList";
 import useMovieList from "@/hooks/useMovieList";
 import useFavorites from "@/hooks/useFavorites";
-import InfoModal from "@/components/infoModal";
 import useInfoModal from "@/hooks/useInfoModal";
 import ScrollButton from "@/components/ScrollButton";
 import Footer from "@/components/Footer";
@@ -38,7 +37,6 @@ export default function Home() {
   const { t } = useTranslation();
   return (
     <>
-    <InfoModal visible={isOpen} onClose={closeModal}/>
     <nav className="z-50 w-full"> 
       <Navbar/>
       </nav>

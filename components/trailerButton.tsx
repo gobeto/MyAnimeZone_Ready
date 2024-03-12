@@ -23,7 +23,7 @@ export default function TrailerButton({trailer}: {trailer: string}) {
         target="_blank"
         href={trailer}>
             <BsFillPlayFill className="mr-1" />
-            {t("Trailer")}</a>
+            {t("Trailer")}</a>   
     )
 
 }
