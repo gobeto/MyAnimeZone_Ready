@@ -22,8 +22,6 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { t } = useTranslation();
 
 
-
-
   if (!visible) {
     return null;
   }

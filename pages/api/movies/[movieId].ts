@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest,res:NextApiResponse){
                 id:movieId
             }
         });
-        
+         
         if(!movie){
             throw new Error('Invalid ID')
         }
