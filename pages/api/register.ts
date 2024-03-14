@@ -15,11 +15,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         email
       }
     })
-    try{
+
     if (existingUser) {
-      //return res.status(422).json({ error: 'Email taken' });
+      return res.status(422).json({ error: 'Email taken' });
     }
-  } catch (error) { return res.status(400).json({ error: `Something went wrong: ${error}` });}
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
