@@ -27,18 +27,43 @@ export default async function handler(
     //   return res.status(422).json({ error: "Email taken" });
     // }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
+    // const hashedPassword = await bcrypt.hash(password, 12);
 
-    const user = await prismadb.user.create({
-      data: {
-        email,
-        name,
-        hashedPassword,
-        image: "",
-        emailVerified: new Date(),
-        isAdmin: false,
-      },
-    });
+    // const user = await prismadb.user.create({
+    //   data: {
+    //     email,
+    //     name,
+    //     hashedPassword,
+    //     emailVerified: new Date(),
+    //     isAdmin: false,
+    //   },
+    // });
+    // return res.status(200).json(user);
+    
+    let hashedPassword;
+    try {
+      hashedPassword = await bcrypt.hash(password, 12);
+    } catch (error) {
+      console.error("Error hashing password:", error);
+      return res.status(500).json({ error: "Error hashing password" });
+    }
+
+    let user;
+    try {
+      user = await prismadb.user.create({
+        data: {
+          email,
+          name,
+          hashedPassword,
+          emailVerified: new Date(),
+          isAdmin: false,
+        },
+      });
+    } catch (error) {
+      console.error("Error creating user:", error);
+      return res.status(500).json({ error: "Error creating user" });
+    }
+
     return res.status(200).json(user);
   } catch (error) {
     console.log(error);
