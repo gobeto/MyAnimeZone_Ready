@@ -88,7 +88,6 @@ const Auth = () => {
                   onChange={(ev: any) => setName(ev.target.value)}
                   id="name"
                   value={name}
-                  required
                 />
               )}
               <Input
@@ -97,7 +96,6 @@ const Auth = () => {
                 id="email"
                 type="email"
                 value={email}
-                required
               />
               <Input
                 label={t("Password")}
@@ -105,7 +103,6 @@ const Auth = () => {
                 id="password"
                 type="password"
                 value={password}
-                required
               />
             </div>
             <button
