@@ -17,15 +17,15 @@ export default async function handler(
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    const existingUser = await prismadb.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    // const existingUser = await prismadb.user.findUnique({
+    //   where: {
+    //     email,
+    //   },
+    // });
 
-    if (existingUser) {
-      return res.status(422).json({ error: "Email taken" });
-    }
+    // if (existingUser) {
+    //   return res.status(422).json({ error: "Email taken" });
+    // }
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
