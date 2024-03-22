@@ -20,7 +20,7 @@ const Auth = () => {
   const [variant, setVariant] = useState("login");
 
   const { t } = useTranslation();
-
+ 
   
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
@@ -34,7 +34,7 @@ const Auth = () => {
         email,
         password,
         redirect: false,
-        callbackUrl: "/",
+        callbackUrl: "/library",
       });
 
       if (result?.error) {
