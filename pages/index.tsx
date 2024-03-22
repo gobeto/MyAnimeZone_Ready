@@ -5,8 +5,6 @@ import Navbar from "@/components/Navbar";
 import Billboard from "@/components/Billboard";
 import MovieList from "@/components/MovieList";
 import useMovieList from "@/hooks/useMovieList";
-import useFavorites from "@/hooks/useFavorites";
-import useInfoModal from "@/hooks/useInfoModal";
 import ScrollButton from "@/components/ScrollButton";
 import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
@@ -20,7 +18,7 @@ export async function getServerSideProps(context: NextPageContext) {
   if (!session) {
     return {
       redirect: {
-        destination: "/",
+        destination: "/auth",
         permanent: false,
       },
     };
@@ -32,8 +30,6 @@ export async function getServerSideProps(context: NextPageContext) {
 
 export default function Home() {
   const{ data: movies = []} = useMovieList();
-  const{ data: favorites = [] } = useFavorites();
-  const {isOpen,closeModal} = useInfoModal();
   const { t } = useTranslation();
   return (
     <>
