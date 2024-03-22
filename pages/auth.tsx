@@ -34,7 +34,7 @@ const Auth = () => {
         email,
         password,
         redirect: false,
-        callbackUrl: "/library",
+        callbackUrl: "/",
       });
 
       if (result?.error) {
