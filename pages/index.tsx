@@ -13,19 +13,33 @@ import { useTranslation } from "react-i18next";
 
 //check if available session exist and if it doesnt it redirect to /auth
 export async function getServerSideProps(context: NextPageContext) {
-  const session = await getSession(context);
+  try {
+    const session = await getSession(context);
 
-  if (!session) {
+    console.log('Session:', session);
+    console.log('Context:', context);
+
+    if (!session) {
+      return {
+        redirect: {
+          destination: "/auth",
+          permanent: false,
+        },
+      };
+    }
+    return {
+      props: {},
+    };
+  } catch (error) {
+    console.error('Error getting session:', error);
+    // You might want to redirect to an error page here, depending on your application's behavior
     return {
       redirect: {
-        destination: "/auth",
+        destination: "/error",
         permanent: false,
       },
     };
   }
-  return {
-    props: {},
-  };
 }
 
 export default function Home() {
