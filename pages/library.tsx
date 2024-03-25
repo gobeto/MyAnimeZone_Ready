@@ -6,8 +6,38 @@ import useFavorites from "@/hooks/useFavorites";
 import AnimesLibrary from "@/components/animesLibrary";
 import ScrollButton from "@/components/ScrollButton";
 import Footer from "@/components/Footer";
-//import AnimeFilterButtons from "@/components/AnimeFilterButtons";
+import { NextPageContext } from "next";
+import { getSession } from "next-auth/react";
 
+export async function getServerSideProps(context: NextPageContext) {
+  try {
+    const session = await getSession(context);
+
+    console.log('Session:', session);
+    console.log('Context:', context);
+
+    if (!session) {
+      console.log('No session found, redirecting to /auth');
+      return {
+        redirect: {
+          destination: "/auth",
+          permanent: false,
+        },
+      };
+    }
+    return {
+      props: {},
+    };
+  } catch (error) {
+    console.error('Error getting session:', error);
+    return {
+      redirect: {
+        destination: "/error",
+        permanent: false,
+      },
+    };
+  }
+}
 
 function AnimeVisualize() {
   const [anime, loading, error] = useAnime({ sort: "title", filter: "action" });

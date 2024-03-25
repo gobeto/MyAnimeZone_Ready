@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import useMovie from "@/hooks/useMovie";
 import { useRouter } from "next/router";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 import Navbar from "@/components/Navbar";
 import { useTranslation } from "react-i18next";
-import { BsFillPlayFill } from "react-icons/bs";
-
+import { NextPageContext } from "next";
+import { getSession } from "next-auth/react";
 
 import FavoriteButton from "@/components/FavoriteButton";
 import WatchingButton from "@/components/WatchingButton";
@@ -22,11 +21,36 @@ interface DeleteMovieProps {
   movie: { id: string };
 
 }
-////
+export async function getServerSideProps(context: NextPageContext) {
+  try {
+    const session = await getSession(context);
 
+    console.log('Session:', session);
+    console.log('Context:', context);
 
+    if (!session) {
+      console.log('No session found, redirecting to /auth');
+      return {
+        redirect: {
+          destination: "/auth",
+          permanent: false,
+        },
+      };
+    }
+    return {
+      props: {},
+    };
+  } catch (error) {
+    console.error('Error getting session:', error);
+    return {
+      redirect: {
+        destination: "/error",
+        permanent: false,
+      },
+    };
+  }
+}
 
-///
 
 function Watch({ onClose, movie }: DeleteMovieProps) {
   const [error, setError] = useState(null);
