@@ -47,7 +47,7 @@ const Auth = () => {
           timer: 1500,
         });
       } else {
-        router.push("/library");
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
