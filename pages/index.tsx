@@ -9,42 +9,24 @@ import ScrollButton from "@/components/ScrollButton";
 import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 
-
-
 //check if available session exist and if it doesnt it redirect to /auth
 export async function getServerSideProps(context: NextPageContext) {
-  try {
-    const session = await getSession(context);
-
-    if (session) {
-      console.log('No session found, redirecting to /auth');
-      return {
-        redirect: {
-          destination: "/auth",
-          permanent: false,
-        },
-      };
-    }
-    else{
-      return {
-        redirect: {
-          destination: "/",
-          permanent: false,
-        }
-      }
-    }
-    return {
-      props: {},
-    };
-  } catch (error) {
+  const session = await getSession(context).catch(error => {
     console.error('Error getting session:', error);
+    return null;
+  });
+
+  if (!session) {
+    console.log('No session found, redirecting to /auth');
     return {
       redirect: {
-        destination: "/error",
+        destination: "/auth",
         permanent: false,
       },
     };
   }
+
+  return { props: {} };
 }
 
 export default function Home() {
