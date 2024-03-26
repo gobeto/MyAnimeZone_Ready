@@ -25,7 +25,7 @@ export async function getServerSideProps(context: NextPageContext) {
   try {
     const session = await getSession(context);
 
-    if (!session) {
+    if (session) {
       console.log('No session found, redirecting to /auth');
       return {
         redirect: {
