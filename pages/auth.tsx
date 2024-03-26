@@ -109,7 +109,7 @@ const Auth = () => {
             >
               {variant == "login" ? t("Login") : t("Sign up")}
             </button>
-            <div className="flex flex-row items-center gap-4 mt-8 justify-center">
+            {/* <div className="flex flex-row items-center gap-4 mt-8 justify-center">
               <div
                 onClick={() => signIn("google", { callbackUrl: "/" })}
                 className="
@@ -144,7 +144,7 @@ const Auth = () => {
               >
                 <FaGithub size={30} />
               </div>
-            </div>
+            </div> */}
             <p className="text-neutral-500 mt-12">
               {variant == "login"
                 ? t("First time using MyAnimeZone?")
