@@ -3,7 +3,7 @@ import useAnime from "@/hooks/useAnimeVisualize";
 import Navbar from "@/components/Navbar";
 import MovieList from "@/components/MovieList";
 import useFavorites from "@/hooks/useFavorites";
-import AnimesLibrary from "@/components/animesLibrary";
+import AnimesLibrary from "@/components/АnimesLibrary";
 import ScrollButton from "@/components/ScrollButton";
 import Footer from "@/components/Footer";
 import { NextPageContext } from "next";
