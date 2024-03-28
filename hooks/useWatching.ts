@@ -2,7 +2,7 @@ import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 
 const useWatching = () => {
-  const { data, error, mutate } = useSWR('/api/watchingS', fetcher, {
+  const { data, error, mutate } = useSWR('/api/watchingGet', fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,

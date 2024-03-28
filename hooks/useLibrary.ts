@@ -2,7 +2,7 @@ import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 
 const useLibrary = () => {
-  const { data, error, mutate } = useSWR('/api/myLibraryS', fetcher, {
+  const { data, error, mutate } = useSWR('/api/myLibraryGet', fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
