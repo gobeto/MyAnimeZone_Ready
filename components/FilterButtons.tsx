@@ -45,8 +45,8 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
         return user.wantToWatchIds.includes(anime.id);
       case "watchingIds":
         return user.watchingIds.includes(anime.id);
-      case "libraryAnimeIds":
-        return user.libraryAnimeIds.includes(anime.id);
+      case "favoriteIds":
+        return user.favoriteIds.includes(anime.id);
       default:
         return true;
     }
@@ -109,9 +109,9 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
           className="text-bg-slate-500 hover:text-white border-2 border-gray-300 hover:bg-slate-500 
           focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 
           text-center me-2 mb-2 "
-          onClick={() => setFilter("libraryAnimeIds")}
+          onClick={() => setFilter("favoriteIds")}
         >
-          {t("Library")}
+          {t("Favorite")}
         </button>
         <button
           className="text-bg-slate-500 hover:text-white border-2 border-gray-300 hover:bg-slate-500 
