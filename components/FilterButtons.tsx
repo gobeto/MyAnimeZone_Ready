@@ -130,7 +130,7 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
               className="m-4 p-4 border-2 border-gray-300 text-white"
               key={anime.id}
             >
-              <Link href={`/watch/${anime.id}`} key={anime.id}>
+              <Link href={`/anime/${anime.id}`} key={anime.id}>
                 <img
                   className="w-60 h-72 object-cover"
                   src={anime.thumbnaiUrl}

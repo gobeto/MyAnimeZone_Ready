@@ -41,16 +41,13 @@ export async function getServerSideProps(context: NextPageContext) {
 }
 
 
-function Watch({ onClose, movie }: DeleteMovieProps) {
+function Watch({  }: DeleteMovieProps) {
   const [error, setError] = useState(null);
 
   const router = useRouter();
   const { movieId } = router.query;
-
   const { data } = useMovie(movieId as string);
-
   const [showEditButton, setshowEditButton] = useState(false);
-  const [showDeleteButton, setshowDeleteButton] = useState(false);
   const swalWithBootstrapButtons = Swal.mixin({
     customClass: {
       confirmButton: "btn-confirm",
@@ -62,16 +59,15 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
 
   const { t } = useTranslation();
 
-  ////
   const deleteMovie = async () => {
     swalWithBootstrapButtons
       .fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: t("Are you sure?"),
+        text: t("You won't be able to revert this!"),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!",
+        confirmButtonText: t("Yes, delete it!"),
+        cancelButtonText: t("No, cancel!"),
         reverseButtons: true,
       })
       .then(async (result) => {
@@ -82,32 +78,28 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
             });
 
             swalWithBootstrapButtons.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
+              title: t("Deleted!"),
+              text: t("Your anime has been deleted."),
               icon: "success",
             });
 
             console.log(response.data);
-            // Redirect to another page
             await router.push("/");
-            // Reload the window
             window.location.reload();
           } catch (error) {
             console.error(error);
           }
         } else if (
-          /* Read more about handling dismissals below */
           result.dismiss === Swal.DismissReason.cancel
         ) {
           swalWithBootstrapButtons.fire({
-            title: "Cancelled",
-            text: "Your imaginary file is safe :)",
+            title: t("Cancelled"),
+            text: t("Your anime is safe :)"),
             icon: "error",
           });
         }
       });
   };
-  ////
   useEffect(() => {
     axios
       .get("/api/current")
@@ -116,7 +108,7 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
       })
       .catch((error) => {
         console.error("Error fetching data: ", error);
-        setError(error); // Set the error state
+        setError(error); 
       });
   }, []);
 
@@ -142,28 +134,6 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
               {t("Episodes")}: {data?.duration}
             </p>
           </div>
-          {/* trailer button */}
-          {/* <div>
-            <a
-                className="cursor-pointer
-                w-6
-                h-6
-                lg:w-10
-                lg:h-10
-                bg-white
-                rounded-full
-                flex
-                justify-center
-                items-center
-                transition
-                hover:bg-neutral-300
-                "
-                target="_blank"
-                href={data?.videoUrl}
-              >
-                <BsFillPlayFill size={30} />
-              </a>
-            </div> */}
           <div className="space-y-4  border border-slate-500 rounded p-10 w-2xl ">
             <div className="flex items-center ">
               <FavoriteButton movieId={data?.id} />
@@ -186,7 +156,6 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
               <p className="ml-2">{t("Completed")}</p>
             </div>
 
-            
             {/* edit button */}
             {isAdmin && (
               <div
@@ -216,28 +185,6 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
               />
             )}
             {/* delete button */}
-            {/* {isAdmin && (
-              <div
-                className="bg-slate-300 text-slate-500 hover:text-white border-2 border-gray-300 hover:bg-slate-500 
-                focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 
-                text-center me-2 mb-2"
-              >
-                <NavbarItem
-                  label={t("Delete")}
-                  onClick={() => setshowDeleteButton(!showDeleteButton)} />
-
-              </div>
-            )}
-            {showDeleteButton && (
-              <DeleteButton
-                onClose={() => setshowDeleteButton(false)}
-                movie={{
-                  id: data?.id,
-                }}
-              />
-            )} */}
-
-            {/* dlet */}
 
             {isAdmin && (
               <div
@@ -247,9 +194,6 @@ function Watch({ onClose, movie }: DeleteMovieProps) {
               >
                 <button
                   onClick={deleteMovie}
-                  // className="bg-slate-300 hover:text-white border-1 border-gray-300 hover:bg-slate-500
-                  //            focus:ring-4 focus:outline-none focus:ring-gray-300  text-sm px-5 py-2.5
-                  //            text-center me-2 mb-2 text-white rounded w-56 font-bold"
                   id={data?.id}
                 >
                   {t("Delete anime")}

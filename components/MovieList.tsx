@@ -1,5 +1,5 @@
 import React from "react";
-import { divide, isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 import MovieCard from "./MovieCard";
 
 //trending now and popular movies - display animes on main page

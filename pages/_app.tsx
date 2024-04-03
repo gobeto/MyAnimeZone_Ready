@@ -1,4 +1,3 @@
-// import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app'
 import '@/styles/globals.css'
 
@@ -16,8 +15,7 @@ export default function App({
 }: AppProps) {
   return (
     <I18nextProvider i18n={i18n}>
-
-    <Component {...pageProps} />
+      <Component {...pageProps} />
     </I18nextProvider>
 
   )

@@ -23,7 +23,6 @@ const Navbar = () => {
   const [showAddMovieForm, setShowAddMovieForm] = useState(false);
   const { t } = useTranslation();
 
-  //>//<
   const [isAdmin, setIsAdmin] = useState(false);
 
   // function to check isAdmin

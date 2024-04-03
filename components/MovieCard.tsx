@@ -1,11 +1,8 @@
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import FavoriteButton from "./FavoriteButton";
 import { useRouter } from "next/router";
 import useInfoModal from "@/hooks/useInfoModal";
-import { BiChevronDown } from "react-icons/bi";
-import TrailerButton from "./trailerButton";
 import { useTranslation } from "react-i18next";
 //hover effect on the movie card
 
@@ -98,7 +95,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
             hover:bg-neutral-300
 
             "
-              onClick={() => router.push(`/watch/${data?.id}`)}
+              onClick={() => router.push(`/anime/${data?.id}`)}
             >
               <AiOutlineInfoCircle size={25} />
             </div>

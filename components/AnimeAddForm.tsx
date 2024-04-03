@@ -21,13 +21,7 @@ function AddMovie({ onClose }: AddMovieProps) {
     event.preventDefault();
 
     if (
-      !title ||
-      !description ||
-      !videoUrl ||
-      !thumbnaiUrl ||
-      !posterUrl ||
-      !genre ||
-      !duration
+      !title || !description || !videoUrl || !thumbnaiUrl || !posterUrl || !genre || !duration
     ) {
       alert("Please fill out all fields");
       return;

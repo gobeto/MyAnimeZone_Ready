@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import useAnime from "@/hooks/useAnimeVisualize";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import FilterButtons from "@/components/FilterButtons";
 import useCurrentUser from "@/hooks/useCurrentUser";

@@ -174,7 +174,7 @@ function AddMovie({ onClose, movie }: AddMovieProps) {
               type="submit"
               className="p-2 bg-blue-500 text-white rounded w-full transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
             >
-              Edit Anime
+              {t("Edit Anime")}
             </button>
           </div>
         </form>

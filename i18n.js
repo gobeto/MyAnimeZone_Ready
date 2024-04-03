@@ -76,6 +76,15 @@ i18n
             "This anime has been added to your Want to watch list",
           "Wrong email or password": "Wrong email or password",
           "All": "All",
+          "Are you sure?": "Are you sure?",
+          "You won't be able to revert this!" : "You won't be able to revert this!",
+          "Yes, delete it!" : "Yes, delete it!",
+          "No, cancel!" : "No, cancel!",
+          "Deleted!" : "Deleted!",
+          "Your anime has been deleted." : "Your anime has been deleted.",
+          "Cancelled": "Cancelled",
+          "Your anime is safe :)" : "Your anime is safe :)",
+          "Edit Anime": "Edit Anime",
         },
       },
       bg: {
@@ -149,6 +158,17 @@ i18n
             "Анимето беше добавено към За гледане",
           "Wrong email or password": "Грешен имейл или парола",
           "All": "Всички",
+          "Are you sure?": "Сигурни ли сте?",
+          "You won't be able to revert this!" : "Анимето ще въде изтрито за винаги!",
+          "Yes, delete it!" : "Да, изтрий го!",
+          "No, cancel!" : "Не, отмени!",
+          "Deleted!" : "Изтрито!",
+          "Your anime has been deleted." : "Анимето беше изтрито.",
+          "Cancelled": "Отменено",
+          "Your anime is safe :)" : "Анимето е в безопасност :)",
+          "Edit Anime": "Редактирай анимето",
+
+
         },
       },
       //...other languages...
