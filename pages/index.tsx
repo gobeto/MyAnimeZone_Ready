@@ -34,8 +34,8 @@ export default function Home() {
   const { t } = useTranslation();
 
   return (
-    <>
-    <nav className="z-50 w-full"> 
+    <div>
+      <nav className="z-50 w-full"> 
       <Navbar/>
       </nav>
       <Billboard />
@@ -44,6 +44,6 @@ export default function Home() {
       </div>
       <ScrollButton />
       <Footer />
-    </>
+    </div>
   );
 }
