@@ -43,7 +43,10 @@ export const authOptions: AuthOptions = {
     })
   ],
   pages: {
-    signIn: '/auth'
+    signIn: '/auth',
+    signOut: '/auth',
+    error: '/auth', // Error code passed in query string as ?error=
+    newUser: '/library' // If set, new users will be directed here on first sign in
   },
   debug: process.env.NODE_ENV === 'development',
   adapter: PrismaAdapter(prismadb),
