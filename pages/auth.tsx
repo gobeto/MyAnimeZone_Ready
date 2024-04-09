@@ -32,7 +32,7 @@ const Auth = () => {
         email,
         password,
         redirect: false,
-        callbackUrl: "/",
+        callbackUrl: "/library",
       });
 
       if (result?.error) {
@@ -45,7 +45,7 @@ const Auth = () => {
           timer: 1500,
         });
       } else {
-        router.push("/");
+        router.push("/library");
       }
     } catch (error) {
       console.log(error);
