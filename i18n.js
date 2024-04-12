@@ -85,6 +85,7 @@ i18n
           "Cancelled": "Cancelled",
           "Your anime is safe :)" : "Your anime is safe :)",
           "Edit Anime": "Edit Anime",
+          "Contact us": "Contact us",
         },
       },
       bg: {
@@ -167,6 +168,7 @@ i18n
           "Cancelled": "Отменено",
           "Your anime is safe :)" : "Анимето е в безопасност :)",
           "Edit Anime": "Редактирай анимето",
+          "Contact us": "Свържете се с нас",
 
 
         },
