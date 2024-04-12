@@ -16,15 +16,15 @@ export async function getServerSideProps(context: NextPageContext) {
     return null;
   });
 
-  if (!session) {
-    console.log('No session found, redirecting to /auth');
-    return {
-      redirect: {
-        destination: "/auth",
-        permanent: false,
-      },
-    };
-  }
+  // if (!session) {
+  //   console.log('No session found, redirecting to /auth');
+  //   return {
+  //     redirect: {
+  //       destination: "/",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
   return { props: {} };
 }
