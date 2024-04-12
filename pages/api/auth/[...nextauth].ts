@@ -17,8 +17,10 @@ export const authOptions: AuthOptions = {
         password: {
           label: 'Password',
           type: 'passord'
-        }
+        },
+        
       },
+      
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Email and password required');
