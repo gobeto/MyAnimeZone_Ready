@@ -10,24 +10,24 @@ import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 
 //check if available session exist and if it doesnt it redirect to /auth
-export async function getServerSideProps(context: NextPageContext) {
-  const session = await getSession(context).catch(error => {
-    console.error('Error getting session:', error);
-    return null;
-  });
+// export async function getServerSideProps(context: NextPageContext) {
+//   const session = await getSession(context).catch(error => {
+//     console.error('Error getting session:', error);
+//     return null;
+//   });
 
-  // if (!session) {
-  //   console.log('No session found, redirecting to /auth');
-  //   return {
-  //     redirect: {
-  //       destination: "/",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+//   if (!session) {
+//     console.log('No session found, redirecting to /auth');
+//     return {
+//       redirect: {
+//         destination: "/",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return { props: {} };
-}
+//   return { props: {} };
+// }
 
 export default function Home() {
   const { data: movies = [] } = useMovieList();
