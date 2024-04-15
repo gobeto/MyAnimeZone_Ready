@@ -21,11 +21,11 @@ interface DeleteMovieProps {
   movie: { id: string };
 
 }
-// export async function getServerSideProps(context: NextPageContext) {
-//   const session = await getSession(context).catch(error => {
-//     console.error('Error getting session:', error);
-//     return null;
-//   });
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context).catch(error => {
+    console.error('Error getting session:', error);
+    return null;
+  });
 
 //   if (!session) {
 //     console.log('No session found, redirecting to /auth');
@@ -37,8 +37,8 @@ interface DeleteMovieProps {
 //     };
 //   }
 
-//   return { props: {} };
-// }
+  return { props: {} };
+}
 
 
 function Watch({  }: DeleteMovieProps) {

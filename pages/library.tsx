@@ -8,11 +8,11 @@ import Footer from "@/components/Footer";
 import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
 
-// export async function getServerSideProps(context: NextPageContext) {
-//   const session = await getSession(context).catch(error => {
-//     console.error('Error getting session:', error);
-//     return null;
-//   });
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context).catch(error => {
+    console.error('Error getting session:', error);
+    return null;
+  });
 
 //   if (!session) {
 //     console.log('No session found, redirecting to /auth');
@@ -24,8 +24,8 @@ import { getSession } from "next-auth/react";
 //     };
 //   }
 
-//   return { props: {} };
-// }
+  return { props: {} };
+}
 
 function AnimeVisualize() {
   const [anime, loading, error] = useAnime({ sort: "title", filter: "action" });
