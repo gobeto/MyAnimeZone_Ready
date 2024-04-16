@@ -23,10 +23,10 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { data } = useCurrentUser();
   const { t } = useTranslation();
   const router = useRouter();
-  const handleSignOut = async () => {
+  const handleSignOut = async (p0: { callbackUrl: string; }) => {
     await signOut();
-    setTimeout(() => router.push('/auth'), 1000); // wait for 1 second before redirecting
-  }
+  //   setTimeout(() => router.push('/auth'), 1000); // wait for 1 second before redirecting
+ }
 
   if (!visible) {
     return null;
@@ -48,8 +48,8 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
         <hr className="bg-gray-600 border-0 h-px my-4" />
         <div
           //onClick={() => signOut()}
-          //onClick={() => signOut({ callbackUrl: '/auth' })}
-          onClick={handleSignOut}
+          onClick={() => handleSignOut({ callbackUrl: '/auth' })}
+          //onClick={handleSignOut}
 
           className="px-3 text-center text-white text-sm hover:underline"
         >
