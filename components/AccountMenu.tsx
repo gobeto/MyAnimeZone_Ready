@@ -1,8 +1,9 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
+import { useEffect } from "react";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { useRouter } from 'next/router';
 import { GetSessionParams, signOut as signOutNextAuth } from "next-auth/react";
 
@@ -25,13 +26,26 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { data } = useCurrentUser();
   const { t } = useTranslation();
   const router = useRouter();
+  const { status } = useSession();
+
   //const handleSignOut = async (p0: { callbackUrl: string; }) => {
    // await signOut();
   //   setTimeout(() => router.push('/auth'), 1000); // wait for 1 second before redirecting
   //}
+  // const signOut = async () => {
+  //   await signOutNextAuth();
+  //   setTimeout(() => router.push('/auth'), 1000); // wait for 1 second before redirecting
+  // }
+
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/auth');
+    }
+  }, [status]);
+
   const signOut = async () => {
     await signOutNextAuth();
-    router.push('/auth');
   }
 
   if (!visible) {
