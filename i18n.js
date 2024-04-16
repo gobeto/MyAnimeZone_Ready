@@ -86,6 +86,7 @@ i18n
           "Your anime is safe :)" : "Your anime is safe :)",
           "Edit Anime": "Edit Anime",
           "Contact us": "Contact us",
+          "Log in": "Log in",
         },
       },
       bg: {
@@ -169,6 +170,7 @@ i18n
           "Your anime is safe :)" : "Анимето е в безопасност :)",
           "Edit Anime": "Редактирай анимето",
           "Contact us": "Свържете се с нас",
+          "Log in": "Влез в акаунта си",
 
 
         },
