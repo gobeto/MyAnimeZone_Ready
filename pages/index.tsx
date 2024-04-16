@@ -1,5 +1,6 @@
 import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 import Navbar from "@/components/Navbar";
 import Billboard from "@/components/Billboard";
@@ -9,24 +10,23 @@ import ScrollButton from "@/components/ScrollButton";
 import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 
+
 //check if available session exist and if it doesnt it redirect to /auth
 export async function getServerSideProps(context: NextPageContext) {
-  const session = await getSession(context).catch(error => {
-    console.error('Error getting session:', error);
-    return null;
-  });
+  const session = await getSession(context);
 
-  // if (!session) {
-  //   console.log('No session found, redirecting to /auth');
-  //   return {
-  //     redirect: {
-  //       destination: "/",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false,
+      }
+    }
+  }
 
-  return { props: {} };
+  return {
+    props: {}
+  }
 }
 
 export default function Home() {
@@ -44,6 +44,7 @@ export default function Home() {
       </div>
       <ScrollButton />
       <Footer />
+      
     </div>
   );
 }

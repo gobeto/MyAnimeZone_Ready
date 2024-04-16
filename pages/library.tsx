@@ -9,22 +9,20 @@ import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
 
 export async function getServerSideProps(context: NextPageContext) {
-  const session = await getSession(context).catch(error => {
-    console.error('Error getting session:', error);
-    return null;
-  });
+  const session = await getSession(context);
 
-  // if (!session) {
-  //   console.log('No session found, redirecting to /auth');
-  //   return {
-  //     redirect: {
-  //       destination: "/auth",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false,
+      }
+    }
+  }
 
-  return { props: {} };
+  return {
+    props: {}
+  }
 }
 
 function AnimeVisualize() {
