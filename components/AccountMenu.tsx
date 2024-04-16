@@ -24,8 +24,8 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { t } = useTranslation();
   const router = useRouter();
   const handleSignOut = async () => {
-    await signOut();
-    router.push('/auth');
+    signOut();
+    await router.push('/auth');
   }
 
   if (!visible) {
