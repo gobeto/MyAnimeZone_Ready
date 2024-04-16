@@ -1,15 +1,14 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { GetSessionParams, signOut } from "next-auth/react";
+import { useCallback } from 'react'; // Import useCallback hook
+import { GetSessionParams, signOut, getSession } from "next-auth/react";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { getSession } from "next-auth/react";
 import { useRouter } from 'next/router';
-
-
 
 interface AccountMenuProps {
   visible?: boolean;
 }
+
 export async function getServerSideProps(context: GetSessionParams | undefined) {
   const session = await getSession(context);
 
@@ -23,15 +22,24 @@ export async function getServerSideProps(context: GetSessionParams | undefined) 
 const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { data } = useCurrentUser();
   const { t } = useTranslation();
-  const router = useRouter();
- 
+  const router = useRouter(); // Use the router for navigation
+
+  // useCallback for signOut function
+  const handleSignOut = useCallback(() => {
+    signOut();
+  }, []);
+
+  // useCallback for redirecting to the auth page
+  const handleSignIn = useCallback(() => {
+    router.push('/auth');
+  }, [router]);
 
   if (!visible) {
     return null;
   }
 
   return (
-    <div className=" bg-black w-56 absolute top-14 right-0 py-5 flex-col border-2 border-gray-800 flex z-50 ">
+    <div className="bg-black w-56 absolute top-14 right-0 py-5 flex-col border-2 border-gray-800 flex z-50">
       <div className="flex flex-col gap-3">
         <div className="px-3 group/item flex flex-row gap-3 item center w-full">
           <img
@@ -45,16 +53,20 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />
         <div
-         onClick={() => signOut()}
-          //onClick={() => signOut({ callbackUrl: '/auth' })}
-          //onClick={handleSignOut}
-
+          onClick={handleSignOut}
           className="px-3 text-center text-white text-sm hover:underline"
         >
           {t("Sign out")}
+        </div>
+        <div
+          onClick={handleSignIn}
+          className="px-3 text-center text-white text-sm hover:underline"
+        >
+          {t("Log in")}
         </div>
       </div>
     </div>
   );
 };
+
 export default AccountMenu;
