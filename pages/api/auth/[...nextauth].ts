@@ -17,10 +17,8 @@ export const authOptions: AuthOptions = {
         password: {
           label: 'Password',
           type: 'passord'
-        },
-        
+        }
       },
-      
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Email and password required');
@@ -45,10 +43,7 @@ export const authOptions: AuthOptions = {
     })
   ],
   pages: {
-    signIn: '/auth',
-    signOut: '/auth',
-    error: '/auth', // Error code passed in query string as ?error=
-    newUser: '/' // If set, new users will be directed here on first sign in
+    signIn: '/auth'
   },
   debug: process.env.NODE_ENV === 'development',
   adapter: PrismaAdapter(prismadb),
