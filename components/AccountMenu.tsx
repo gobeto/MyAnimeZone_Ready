@@ -3,6 +3,8 @@ import { GetSessionParams, signOut } from "next-auth/react";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { getSession } from "next-auth/react";
+import { useRouter } from 'next/router';
+
 
 interface AccountMenuProps {
   visible?: boolean;
@@ -20,7 +22,11 @@ export async function getServerSideProps(context: GetSessionParams | undefined) 
 const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { data } = useCurrentUser();
   const { t } = useTranslation();
-
+  const router = useRouter();
+  const handleSignOut = async () => {
+    await signOut();
+    router.push('/auth');
+  }
 
   if (!visible) {
     return null;
@@ -42,7 +48,9 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
         <hr className="bg-gray-600 border-0 h-px my-4" />
         <div
           //onClick={() => signOut()}
-          onClick={() => signOut({ callbackUrl: '/auth' })}
+          //onClick={() => signOut({ callbackUrl: '/auth' })}
+          onClick={handleSignOut}
+
           className="px-3 text-center text-white text-sm hover:underline"
         >
           {t("Sign out")}
