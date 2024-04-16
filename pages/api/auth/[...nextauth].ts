@@ -1,4 +1,5 @@
 import NextAuth, { AuthOptions } from 'next-auth';
+
 import Credentials from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { compare } from 'bcrypt';
@@ -16,7 +17,7 @@ export const authOptions: AuthOptions = {
         },
         password: {
           label: 'Password',
-          type: 'passord'
+          type: 'password'
         }
       },
       async authorize(credentials) {
@@ -55,3 +56,4 @@ export const authOptions: AuthOptions = {
 };
 
 export default NextAuth(authOptions);
+
