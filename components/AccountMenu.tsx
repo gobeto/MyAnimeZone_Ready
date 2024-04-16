@@ -1,9 +1,11 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { GetSessionParams, signOut } from "next-auth/react";
+
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { getSession } from "next-auth/react";
 import { useRouter } from 'next/router';
+import { GetSessionParams, signOut as signOutNextAuth } from "next-auth/react";
+
 
 
 interface AccountMenuProps {
@@ -23,10 +25,14 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { data } = useCurrentUser();
   const { t } = useTranslation();
   const router = useRouter();
-  const handleSignOut = async (p0: { callbackUrl: string; }) => {
-    await signOut();
+  //const handleSignOut = async (p0: { callbackUrl: string; }) => {
+   // await signOut();
   //   setTimeout(() => router.push('/auth'), 1000); // wait for 1 second before redirecting
- }
+  //}
+  const signOut = async () => {
+    await signOutNextAuth();
+    router.push('/auth');
+  }
 
   if (!visible) {
     return null;
@@ -47,8 +53,8 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />
         <div
-          //onClick={() => signOut()}
-          onClick={() => handleSignOut({ callbackUrl: '/auth' })}
+         onClick={signOut}
+          //onClick={() => handleSignOut({ callbackUrl: '/auth' })}
           //onClick={handleSignOut}
 
           className="px-3 text-center text-white text-sm hover:underline"
