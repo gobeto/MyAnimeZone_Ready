@@ -21,6 +21,7 @@ export async function getServerSideProps(context: GetSessionParams | undefined) 
 
 const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { data } = useCurrentUser();
+  const session = data; // Assuming session data is fetched via useCurrentUser hook
   const { t } = useTranslation();
   const router = useRouter(); // Use the router for navigation
 
@@ -48,22 +49,25 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
             alt=""
           />
           <p className="text-white text-sm group-hover/item:underline">
-            {data?.name}
+            {session?.name || t("Guest")}
           </p>
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />
-        <div
-          onClick={handleSignOut}
-          className="px-3 text-center text-white text-sm hover:underline"
-        >
-          {t("Sign out")}
-        </div>
-        <div
-          onClick={handleSignIn}
-          className="px-3 text-center text-white text-sm hover:underline"
-        >
-          {t("Log in")}
-        </div>
+        {session ? (
+          <div
+            onClick={handleSignOut}
+            className="px-3 text-center text-white text-sm hover:underline"
+          >
+            {t("Sign out")}
+          </div>
+        ) : (
+          <div
+            onClick={handleSignIn}
+            className="px-3 text-center text-white text-sm hover:underline"
+          >
+            {t("Log in")}
+          </div>
+        )}
       </div>
     </div>
   );
