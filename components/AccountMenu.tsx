@@ -25,7 +25,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const router = useRouter();
   const handleSignOut = async () => {
     await signOut();
-    router.push('/auth');
+    setTimeout(() => router.push('/auth'), 1000); // wait for 1 second before redirecting
   }
 
   if (!visible) {
