@@ -4,7 +4,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { getSession } from "next-auth/react";
 import { useRouter } from 'next/router';
-import { signOut as signOutNextAuth } from "next-auth/react";
 
 
 
@@ -25,10 +24,7 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { data } = useCurrentUser();
   const { t } = useTranslation();
   const router = useRouter();
-  const handleSignOut = () => {
-    signOutNextAuth({ callbackUrl: `${window.location.origin}/auth` });
-  }
-  
+ 
 
   if (!visible) {
     return null;
@@ -49,8 +45,8 @@ const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />
         <div
-         onClick={handleSignOut}
-          //onClick={() => handleSignOut({ callbackUrl: '/auth' })}
+         onClick={() => signOut()}
+          //onClick={() => signOut({ callbackUrl: '/auth' })}
           //onClick={handleSignOut}
 
           className="px-3 text-center text-white text-sm hover:underline"
