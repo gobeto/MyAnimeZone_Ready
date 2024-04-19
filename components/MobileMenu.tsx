@@ -36,6 +36,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ visible }) => {
             <NavbarItem label={t("Home")} />
           </Link>
         </div>
+        
 
 
         <div className=" px-3 text-center text-white hover:underline">
