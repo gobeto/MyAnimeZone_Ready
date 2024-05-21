@@ -1,6 +1,7 @@
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
 
+//fetch "wantToWatch" data from the server
 const useWantToWatch = () => {
   const { data, error, mutate } = useSWR('/api/wantToWatchGet', fetcher, {
     revalidateIfStale: false,

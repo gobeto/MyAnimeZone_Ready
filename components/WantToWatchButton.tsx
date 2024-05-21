@@ -12,16 +12,17 @@ interface WantToWatchButtonProps {
   movieId: string;
 }
 
+// WantToWatchButton component definition
 const WantToWatchButton: React.FC<WantToWatchButtonProps> = ({ movieId }) => {
   const { mutate: mutateWantToWatch } = useWantToWatch();
   const { data: currentUser, mutate } = useCurrentUser();
   const { t } = useTranslation();
 
   const isWantToWatch = useMemo(() => {
-    const list = currentUser?.wantToWatchIds || [];
+    const list = currentUser?.wantToWatchIds || []; // Get the list of "want to watch" IDs
 
     return list.includes(movieId);
-  }, [currentUser, movieId]);
+  }, [currentUser, movieId]);// Dependencies for the useMemo hook
 
   const toggleWantToWatch = useCallback(async () => {
     let response;

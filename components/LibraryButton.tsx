@@ -13,16 +13,18 @@ interface LibraryButtonProps {
 }
 
 const LibraryButton: React.FC<LibraryButtonProps> = ({ movieId }) => {
-  const { mutate: mutateLibrary } = useLibrary();
-  const { data: currentUser, mutate } = useCurrentUser();
+  const { mutate: mutateLibrary } = useLibrary(); // Hook to trigger a re-fetch of the library
+  const { data: currentUser, mutate } = useCurrentUser(); // Hook to get and mutate current user data
   const { t } = useTranslation();
 
+  // Memoized value
   const isLibrary = useMemo(() => {
     const list = currentUser?.libraryAnimeIds || [];
 
     return list.includes(movieId);
-  }, [currentUser, movieId]);
+  }, [currentUser, movieId]); // Dependencies for the useMemo hook
 
+  // Function to toggle the library status of the movie
   const toggleLibrarys = useCallback(async () => {
     let response;
     // check if the movie is library and if it is, delete it
@@ -54,7 +56,7 @@ const LibraryButton: React.FC<LibraryButtonProps> = ({ movieId }) => {
     });
 
     mutateLibrary();
-  }, [movieId, isLibrary, currentUser, mutate, mutateLibrary]);
+  }, [movieId, isLibrary, currentUser, mutate, mutateLibrary]);  // Dependencies for the useCallback hook
 
   const Icon = isLibrary ? AiOutlineCheck : AiOutlinePlus;
   return (

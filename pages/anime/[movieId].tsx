@@ -8,7 +8,6 @@ import { getSession } from "next-auth/react";
 
 import FavoriteButton from "@/components/FavoriteButton";
 import WatchingButton from "@/components/WatchingButton";
-import LibraryButton from "@/components/LibraryButton";
 import WantToWatchButton from "@/components/WantToWatchButton";
 import CompletedButton from "@/components/CompletedButton";
 import EditButton from "@/components/EditAnimeButton";
@@ -21,17 +20,10 @@ interface DeleteMovieProps {
   movie: { id: string };
 
 }
+
+// Fetch server-side session data
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
-
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: '/auth',
-  //       permanent: false,
-  //     }
-  //   }
-  // }
 
   return {
     props: {}
@@ -56,6 +48,7 @@ function Watch({  }: DeleteMovieProps) {
 
   const { t } = useTranslation();
 
+  // Function to handle movie deletion
   const deleteMovie = async () => {
     swalWithBootstrapButtons
       .fire({
@@ -97,6 +90,7 @@ function Watch({  }: DeleteMovieProps) {
         }
       });
   };
+  // Fetch current user data to check if they are an admin
   useEffect(() => {
     axios
       .get("/api/current")
@@ -177,8 +171,8 @@ function Watch({  }: DeleteMovieProps) {
                 }}
               />
             )}
-            {/* delete button */}
 
+            {/* delete button */}
             {isAdmin && (
               <div
                 className="bg-slate-300  hover:text-white border-2 border-gray-300 hover:bg-slate-500 

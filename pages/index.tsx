@@ -1,6 +1,5 @@
 import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
-import useCurrentUser from "@/hooks/useCurrentUser";
 
 import Navbar from "@/components/Navbar";
 import Billboard from "@/components/Billboard";
@@ -11,18 +10,9 @@ import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 
 
-//check if available session exist and if it doesnt it redirect to /auth
+// Fetch server-side session data
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
-
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: '/auth',
-  //       permanent: false,
-  //     }
-  //   }
-  // }
 
   return {
     props: {}

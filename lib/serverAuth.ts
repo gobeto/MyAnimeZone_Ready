@@ -4,6 +4,9 @@ import { getServerSession } from "next-auth";
 import prismadb from '@/lib/prismadb';
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
+
+//authenticates a user on the server side
+// Async function to handle server-side authentication
 const serverAuth = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getServerSession(req, res, authOptions);
 

@@ -8,8 +8,11 @@ export default async function handler(req: NextApiRequest,res:NextApiResponse){
     }
 
     try{
+        // Authenticate the request
         await serverAuth(req,res);
         const {movieId} = req.query;
+
+        // Validate movieId
         if(typeof movieId != 'string'){
             throw new Error('Invalid ID');
         }
@@ -17,6 +20,7 @@ export default async function handler(req: NextApiRequest,res:NextApiResponse){
             throw new Error('Invalid ID');
         }
 
+        // Fetch movie from the database
         const movie = await prismadb.movie.findUnique({
             where:{
                 id:movieId

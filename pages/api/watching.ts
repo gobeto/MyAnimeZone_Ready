@@ -6,11 +6,14 @@ import serverAuth from "@/lib/serverAuth";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
+
+    // Handle POST requests to add a movie to the user's "watching" list
     if (req.method === 'POST') {
       const { currentUser } = await serverAuth(req, res);
 
       const { movieId } = req.body;
-  
+
+      // Check if the movie exists in the database
       const existingMovie = await prismadb.movie.findUnique({
         where: {
           id: movieId,
@@ -20,7 +23,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!existingMovie) {
         throw new Error('Invalid ID');
       }
-  
+      
+      // Update user's watchingIds to include the movieId
       const user = await prismadb.user.update({
         where: {
           email: currentUser.email || '',
@@ -35,11 +39,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json(user);
     }
 
+    // Handle DELETE requests to remove a movie from the user's "watching" list
     if (req.method === 'DELETE') {
       const { currentUser } = await serverAuth(req, res);
 
       const { movieId } = req.body;
 
+      // Check if the movie exists in the database
       const existingMovie = await prismadb.movie.findUnique({
         where: {
           id: movieId,
@@ -50,6 +56,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw new Error('Invalid ID');
       }
 
+      // Update user's watchingIds to remove the movieId
       const updatedWatchingIds = without(currentUser.watchingIds, movieId);
 
       const updatedUser = await prismadb.user.update({

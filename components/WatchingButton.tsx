@@ -4,12 +4,11 @@ import { AiOutlinePlus, AiOutlineCheck } from "react-icons/ai";
 
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
-
-
-
 import useCurrentUser from "@/hooks/useCurrentUser";
 import useWatching from "@/hooks/useWatching"; 
 
+
+// Interface for WatchingButton component props
 interface WatchingButtonProps {
   movieId: string;
 }
@@ -25,6 +24,7 @@ const WatchingButton: React.FC<WatchingButtonProps> = ({ movieId }) => {
     return list.includes(movieId);
   }, [currentUser, movieId]);
 
+  // Function to toggle the "watching" status of the movie
   const watchingFavorites = useCallback(async () => {
     let response;
     // check if the movie is watching and if it is, delete it
@@ -48,6 +48,7 @@ const WatchingButton: React.FC<WatchingButtonProps> = ({ movieId }) => {
       });
     }
 
+    // Update the user's "watching" IDs
     const updatedWatchingIds = response?.data?.watchingIds;
 
     mutate({
@@ -55,8 +56,8 @@ const WatchingButton: React.FC<WatchingButtonProps> = ({ movieId }) => {
       watchingIds: updatedWatchingIds
     });
 
-    mutateWatching();
-  }, [movieId, isWatching, currentUser, mutate, mutateWatching]);
+    mutateWatching();// Trigger re-fetch of "watching" list
+  }, [movieId, isWatching, currentUser, mutate, mutateWatching]); // Dependencies for the useCallback hook
 
   const Icon = isWatching ? AiOutlineCheck : AiOutlinePlus;
   return (

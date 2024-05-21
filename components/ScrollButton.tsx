@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
+  // Function to toggle button visibility based on scroll position
   const toggleVisibility = () => {
     if (window.pageYOffset > 200) {
       setIsVisible(true);

@@ -33,6 +33,7 @@ const AnimeList: React.FC<AnimeListProps> = ({ animes, user }) => {
     searchTerm,
   });
 
+  // Filter anime based on search term
   const filteredAnime = anime.filter((anime: { title: string }) =>
     anime.title.toLowerCase().includes(searchTerm.toLowerCase())
   );

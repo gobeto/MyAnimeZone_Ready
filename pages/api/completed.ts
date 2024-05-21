@@ -6,6 +6,7 @@ import serverAuth from "@/lib/serverAuth";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
+    // Handle POST requests to add anime to completed list
     if (req.method === 'POST') {
       const { currentUser } = await serverAuth(req, res);
 
@@ -20,7 +21,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!existingMovie) {
         throw new Error('Invalid ID');
       }
-  
+      
+      // Update user's completedIds to include the movieId
       const user = await prismadb.user.update({
         where: {
           email: currentUser.email || '',
@@ -35,6 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json(user);
     }
 
+    // Handle DELETE requests to remove anime from completed list
     if (req.method === 'DELETE') {
       const { currentUser } = await serverAuth(req, res);
 
@@ -50,6 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         throw new Error('Invalid ID');
       }
 
+      // Update user's completedIds to remove the movieId
       const updatedCompletedIds = without(currentUser.completedIds, movieId);
 
       const updatedUser = await prismadb.user.update({

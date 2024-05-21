@@ -3,6 +3,7 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 
+// Defining the props for the AddMovie component
 interface AddMovieProps {
   onClose: () => void;
   movie: {
@@ -29,6 +30,7 @@ function AddMovie({ onClose, movie }: AddMovieProps) {
   const [id, setId] = useState(movie.id);
 
   const { t } = useTranslation();
+  // This function handles the editing of the movie
   const handleEdit = async () => {
     const updatedMovie = {
       id,

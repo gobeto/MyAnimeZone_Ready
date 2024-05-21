@@ -1,5 +1,7 @@
 import { create } from "zustand"
 
+//manages the state of an informational modal,  whether the modal is open or closed and which movie is currently selected.
+//billboard and movie card
 export interface ModalStoreInterface{
     movieId?:string;
     isOpen:boolean;

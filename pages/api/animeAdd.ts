@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import prismadb from "@/lib/prismadb";
 
 
-// This code creates a new movie in the database using the data sent in the POST request. If the request method is not POST, it returns a 
+// This code creates a new anime in the database using the data sent in the POST request. If the request method is not POST, it returns a 
 // 405 status code. If there's an error while creating the movie, it returns a 400 status code.
 
 export default async function handler(

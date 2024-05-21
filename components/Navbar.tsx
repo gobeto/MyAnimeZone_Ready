@@ -3,10 +3,6 @@ import { BsChevronDown, BsSearch, BsBell } from "react-icons/bs";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
-//>
-//<
-
-
 
 import MobileMenu from "./MobileMenu";
 import NavbarItem from "./NavbarItem";
@@ -25,7 +21,7 @@ const Navbar = () => {
 
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // function to check isAdmin
+  // fetch current user data and check if admin
   useEffect(() => {
     axios
       .get("/api/current")
@@ -37,6 +33,7 @@ const Navbar = () => {
       });
   }, []);
 
+  // Effect hook to handle scroll event and toggle navbar background
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY >= TOP_OFFSET) {
@@ -52,20 +49,18 @@ const Navbar = () => {
     };
   }, []);
 
+  // Function to toggle mobile menu visibility
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((current) => !current);
   }, []);
 
+  // Function to toggle account menu visibility
   const toggleAccountMenu = useCallback(() => {
     setShowAccountMenu((current) => !current);
   }, []);
 
-  //>
-  //<
-
   return (
     <nav className="w-full  z-40">
-      {/* fixed */}
       <div
         className={`
             px-4
@@ -81,7 +76,6 @@ const Navbar = () => {
             `}
       >
         <img className="h-10 lg:h-20  " src="/images/WebSiteLogo.png" alt="Logo" />
-        {/* <p className="text-white p-4 font-bold lg:text-xl ">MyAnimeZone</p> */}
         <div
           className="
                 flex-row
@@ -131,11 +125,10 @@ const Navbar = () => {
             onClick={toggleAccountMenu}
             className="flex flex-row items-center gap-2 cursor-pointer relative"
           >
-            {/* <Link href={`/auth`}> */}
+            
               <div className="w-10 h-10 lg:w-10 lg:h-10 rounded-md overflow-hidden relative">
                 <img src="/images/logoOni.png" alt="" />
               </div>
-            {/* </Link> */}
             <BsChevronDown
               className={`text-white transition ${
                 showAccountMenu ? "rotate-180" : "rotate-0"

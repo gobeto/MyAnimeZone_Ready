@@ -3,6 +3,7 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 
+// Defining the props for the AddMovie component
 interface AddMovieProps {
   onClose: () => void;
 }
@@ -27,6 +28,7 @@ function AddMovie({ onClose }: AddMovieProps) {
       return;
     }
 
+    // Creating the movie object
     const movie = {
       title,
       description,
@@ -44,7 +46,7 @@ function AddMovie({ onClose }: AddMovieProps) {
         icon: "success",
         title: t("This anime has been added successfully"),
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
       window.location.reload();
     } catch (error) {
@@ -54,7 +56,6 @@ function AddMovie({ onClose }: AddMovieProps) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50 ">
-      {/* bg-[url('/images/SAOcastle.png')] bg-auto bg-center bg-no-repeat */}
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
         <form
           onSubmit={handleSubmit}
@@ -172,9 +173,6 @@ function AddMovie({ onClose }: AddMovieProps) {
               {t("Add anime")}
             </button>
           </div>
-          {/* <div>
-            <button type="button" onClick={onClose} className="p-2 bg-red-500 text-white rounded w-full">Cancel</button>
-          </div> */}
         </form>
       </div>
     </div>

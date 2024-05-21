@@ -1,14 +1,15 @@
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { useCallback } from 'react'; // Import useCallback hook
+import { useCallback } from 'react'; 
 import { GetSessionParams, signOut, getSession } from "next-auth/react";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from 'next/router';
 
+// Defining the props for the AccountMenu component
 interface AccountMenuProps {
   visible?: boolean;
 }
-
+// This function fetches the session data on server side
 export async function getServerSideProps(context: GetSessionParams | undefined) {
   const session = await getSession(context);
 
@@ -21,7 +22,7 @@ export async function getServerSideProps(context: GetSessionParams | undefined) 
 
 const AccountMenu: React.FC<AccountMenuProps> = ({ visible }) => {
   const { data } = useCurrentUser();
-  const session = data; // Assuming session data is fetched via useCurrentUser hook
+  const session = data; // Assuming session data is fetched with useCurrentUser hook
   const { t } = useTranslation();
   const router = useRouter(); // Use the router for navigation
 

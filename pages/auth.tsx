@@ -17,12 +17,14 @@ const Auth = () => {
 
   const { t } = useTranslation();
 
+  // Toggle between login and register variants
   const toggleVariant = useCallback(() => {
     setVariant((currentVariant) =>
       currentVariant == "login" ? "register" : "login"
     );
   }, []);
 
+  // Handle user login
   const login = useCallback(async () => {
     try {
       const result = await signIn("credentials", {
@@ -50,6 +52,7 @@ const Auth = () => {
     }
   }, [email, password, router]);
 
+  // Handle user registration
   const register = useCallback(async () => {
     try {
       await axios.post("/api/register", {
@@ -66,10 +69,8 @@ const Auth = () => {
 
   return (
     <div className="relative h-full w-full bg-[url('/images/sao-background2.png')] bg-no-repeat bg-conter bg-fixed bg-cover">
-      {/* sao-background2 */}
       <div className="bg-black w-full h-full lg:bg-opacity-50">
         <nav className="px-12 py-2">
-          {/* <img src="/images/logoOni.png" alt="logo" className="h-12" /> */}
         </nav>
         <div className="flex justify-center mt-20">
           <div className="bg-black bg-opacity-70 px-16 py-16 self-conter mt-2 lg:w-2/5 lg:max-w-md rounded-md w-96">

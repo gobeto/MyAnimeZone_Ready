@@ -19,13 +19,15 @@ interface Options {
   searchTerm?: string;
 }
 
+// Custom hook to fetch and filter movies
 const useMovie = (options: Options = {}): [Movie[], boolean, any, (searchTerm: string) => void] => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);// State to store all movies
+  const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);// State to store filtered movies
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
 
+  // Effect to fetch movies based on options
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -40,8 +42,9 @@ const useMovie = (options: Options = {}): [Movie[], boolean, any, (searchTerm: s
     };
 
     fetchMovies();
-}, [JSON.stringify(options)]);
+}, [JSON.stringify(options)]);// Refetch movies if options change
 
+// Effect to filter movies based on search term
   useEffect(() => {
     if (searchTerm === "") {
       setFilteredMovies(movies);

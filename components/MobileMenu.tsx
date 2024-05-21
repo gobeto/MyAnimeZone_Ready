@@ -12,7 +12,8 @@ interface MobileMenuProps {
 const MobileMenu: React.FC<MobileMenuProps> = ({ visible }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const { t } = useTranslation();
-
+ 
+  // Effect hook to fetch current user data
   useEffect(() => {
     axios
       .get("/api/current")

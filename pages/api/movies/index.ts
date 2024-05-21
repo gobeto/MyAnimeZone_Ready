@@ -9,8 +9,10 @@ export default async function handler(req:NextApiRequest, res:NextApiResponse) {
     }
 
     try{
+        // Authenticate the request
         await serverAuth(req,res)
 
+        // Fetch all movies from the database
         const movies = await prismadb.movie.findMany()
 
         return res.status(200).json(movies);

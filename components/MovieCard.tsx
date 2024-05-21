@@ -4,8 +4,8 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useRouter } from "next/router";
 import useInfoModal from "@/hooks/useInfoModal";
 import { useTranslation } from "react-i18next";
-//hover effect on the movie card
 
+//hover effect on the movie card
 interface MovieCardProps {
   data: Record<string, any>;
   trailer: string;
@@ -16,7 +16,6 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
   const { openModal } = useInfoModal();
   const { t } = useTranslation();
   return (
-    //ot tuk se promenq razmera na img za animeta v main page
     <div className="group bg-slate-500 col-span relative rounded-xl  w-[18vw] h-[22vw]">
       <img
         className="cursor-pointer 
@@ -99,34 +98,9 @@ const MovieCard: React.FC<MovieCardProps> = ({ data, trailer }) => {
             >
               <AiOutlineInfoCircle size={25} />
             </div>
-            {/* <FavoriteButton movieId={data?.id} /> */}
-            {/* <div 
-            onClick={()=>openModal(data?.id)}
-            className="
-            cursor-pointer 
-            ml-auto 
-            group/item 
-            w-6 
-            h-6 
-            lg:w-10 
-            lg:h-10 
-            border-white 
-            border-2 
-            rounded-full 
-            flex 
-            justify-center 
-            items-center 
-            transition 
-            hover:border-neutral-300">
-              <BiChevronDown 
-              size={30}
-              className="
-              text-white
-              group-hover/item:text-neutral-300
-              "/>
-            </div> */}
+
             <div className="">
-              {/* ml-auto */}
+              
               <a
                 className="cursor-pointer
                 w-6

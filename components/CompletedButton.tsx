@@ -23,6 +23,7 @@ const CompletedButton: React.FC<CompletedButtonProps> = ({ movieId }) => {
     return list.includes(movieId);
   }, [currentUser, movieId]);
 
+  // This function toggles the completed status of the movie
   const toggleCompleted = useCallback(async () => {
     let response;
     // check if the movie is completed and if it is, delete it

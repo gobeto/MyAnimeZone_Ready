@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import{AiOutlineInfoCircle} from 'react-icons/ai';
 import { useTranslation } from "react-i18next";
 
-//info button which redirect to individual anime page - Billboard
-
 interface PlayButtonProps{
     movieId:string;
 }

@@ -23,6 +23,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
     return list.includes(movieId);
   }, [currentUser, movieId]);
 
+  // Function to toggle the favorite status of the movie
   const toggleFavorites = useCallback(async () => {
     let response;
     // check if the movie is favorite and if it is, delete it
@@ -45,7 +46,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ movieId }) => {
         timer: 1500
       });
     }
-
+    // Update the user's favorite IDs
     const updatedFavoriteIds = response?.data?.favoriteIds;
 
     mutate({
