@@ -132,11 +132,11 @@ function Watch({  }: DeleteMovieProps) {
             </div>
             <div className="flex items-center ">
               <WatchingButton movieId={data?.id} />
-              <p className="ml-2">{t("Watching")}</p>
+              <p className="ml-2 w-10">{t("Watching")}</p>
             </div>
             <div className="flex items-center w-xl ">
               <WantToWatchButton movieId={data?.id} />
-              <p className="ml-2 ">{t("Want to watch")}</p>
+              <p className="ml-2 w-10">{t("Want to watch")}</p>
             </div>
             <div className="flex items-center ">
               <CompletedButton movieId={data?.id} />
